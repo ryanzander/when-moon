@@ -8,20 +8,20 @@
 
 /* Begin PBXBuildFile section */
 		781314C9201322CF00A3D4E4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 781314C8201322CF00A3D4E4 /* AppDelegate.swift */; };
-		781314CB201322CF00A3D4E4 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 781314CA201322CF00A3D4E4 /* ViewController.swift */; };
 		781314CE201322CF00A3D4E4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 781314CC201322CF00A3D4E4 /* Main.storyboard */; };
 		781314D0201322CF00A3D4E4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 781314CF201322CF00A3D4E4 /* Assets.xcassets */; };
 		781314D3201322CF00A3D4E4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 781314D1201322CF00A3D4E4 /* LaunchScreen.storyboard */; };
+		781314DF201323CE00A3D4E4 /* HomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 781314DE201323CE00A3D4E4 /* HomeVC.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		781314C5201322CF00A3D4E4 /* WhenMoon.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WhenMoon.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		781314C8201322CF00A3D4E4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		781314CA201322CF00A3D4E4 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		781314CD201322CF00A3D4E4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		781314CF201322CF00A3D4E4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		781314D2201322CF00A3D4E4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		781314D4201322CF00A3D4E4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		781314DE201323CE00A3D4E4 /* HomeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeVC.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,14 +54,46 @@
 		781314C7201322CF00A3D4E4 /* WhenMoon */ = {
 			isa = PBXGroup;
 			children = (
+				781314DD2013234600A3D4E4 /* Resources */,
+				781314DA2013230900A3D4E4 /* Model */,
+				781314DB2013231900A3D4E4 /* View */,
+				781314DC2013232000A3D4E4 /* Controller */,
 				781314C8201322CF00A3D4E4 /* AppDelegate.swift */,
-				781314CA201322CF00A3D4E4 /* ViewController.swift */,
-				781314CC201322CF00A3D4E4 /* Main.storyboard */,
 				781314CF201322CF00A3D4E4 /* Assets.xcassets */,
+				781314CC201322CF00A3D4E4 /* Main.storyboard */,
 				781314D1201322CF00A3D4E4 /* LaunchScreen.storyboard */,
 				781314D4201322CF00A3D4E4 /* Info.plist */,
 			);
 			path = WhenMoon;
+			sourceTree = "<group>";
+		};
+		781314DA2013230900A3D4E4 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		781314DB2013231900A3D4E4 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		781314DC2013232000A3D4E4 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				781314DE201323CE00A3D4E4 /* HomeVC.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		781314DD2013234600A3D4E4 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Resources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -136,8 +168,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				781314CB201322CF00A3D4E4 /* ViewController.swift in Sources */,
 				781314C9201322CF00A3D4E4 /* AppDelegate.swift in Sources */,
+				781314DF201323CE00A3D4E4 /* HomeVC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
