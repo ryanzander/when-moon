@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7170A94F93395B2644DCCF20 /* Pods_WhenMoon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 032DED313648F8EBC9122208 /* Pods_WhenMoon.framework */; };
 		781314C9201322CF00A3D4E4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 781314C8201322CF00A3D4E4 /* AppDelegate.swift */; };
 		781314CE201322CF00A3D4E4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 781314CC201322CF00A3D4E4 /* Main.storyboard */; };
 		781314D0201322CF00A3D4E4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 781314CF201322CF00A3D4E4 /* Assets.xcassets */; };
@@ -15,6 +16,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		032DED313648F8EBC9122208 /* Pods_WhenMoon.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WhenMoon.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		0A6EEE213EDEFA630FA4F50A /* Pods-WhenMoon.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WhenMoon.debug.xcconfig"; path = "Pods/Target Support Files/Pods-WhenMoon/Pods-WhenMoon.debug.xcconfig"; sourceTree = "<group>"; };
+		20AFEBF76D18619E1C99AE1B /* Pods-WhenMoon.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WhenMoon.release.xcconfig"; path = "Pods/Target Support Files/Pods-WhenMoon/Pods-WhenMoon.release.xcconfig"; sourceTree = "<group>"; };
 		781314C5201322CF00A3D4E4 /* WhenMoon.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WhenMoon.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		781314C8201322CF00A3D4E4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		781314CD201322CF00A3D4E4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -29,17 +33,29 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7170A94F93395B2644DCCF20 /* Pods_WhenMoon.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		49464B55E66B9D3674FA130F /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				0A6EEE213EDEFA630FA4F50A /* Pods-WhenMoon.debug.xcconfig */,
+				20AFEBF76D18619E1C99AE1B /* Pods-WhenMoon.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		781314BC201322CF00A3D4E4 = {
 			isa = PBXGroup;
 			children = (
 				781314C7201322CF00A3D4E4 /* WhenMoon */,
 				781314C6201322CF00A3D4E4 /* Products */,
+				49464B55E66B9D3674FA130F /* Pods */,
+				9880AE055C4F3FE258274C23 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -96,6 +112,14 @@
 			path = Resources;
 			sourceTree = "<group>";
 		};
+		9880AE055C4F3FE258274C23 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				032DED313648F8EBC9122208 /* Pods_WhenMoon.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -103,9 +127,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 781314D7201322CF00A3D4E4 /* Build configuration list for PBXNativeTarget "WhenMoon" */;
 			buildPhases = (
+				7F10EC112E0894BBA1105AAC /* [CP] Check Pods Manifest.lock */,
 				781314C1201322CF00A3D4E4 /* Sources */,
 				781314C2201322CF00A3D4E4 /* Frameworks */,
 				781314C3201322CF00A3D4E4 /* Resources */,
+				D48572BF3310576624F5D2FF /* [CP] Embed Pods Frameworks */,
+				E1E59538949EE6235C949038 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -162,6 +189,54 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		7F10EC112E0894BBA1105AAC /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		D48572BF3310576624F5D2FF /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-WhenMoon/Pods-WhenMoon-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		E1E59538949EE6235C949038 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-WhenMoon/Pods-WhenMoon-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		781314C1201322CF00A3D4E4 /* Sources */ = {
@@ -304,31 +379,35 @@
 		};
 		781314D8201322CF00A3D4E4 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0A6EEE213EDEFA630FA4F50A /* Pods-WhenMoon.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = D9N528BE35;
 				INFOPLIST_FILE = WhenMoon/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.nagarajarivers.WhenMoon;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
 		781314D9201322CF00A3D4E4 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 20AFEBF76D18619E1C99AE1B /* Pods-WhenMoon.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = D9N528BE35;
 				INFOPLIST_FILE = WhenMoon/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.nagarajarivers.WhenMoon;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
