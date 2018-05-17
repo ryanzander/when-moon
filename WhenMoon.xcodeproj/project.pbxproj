@@ -13,6 +13,18 @@
 		781314D0201322CF00A3D4E4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 781314CF201322CF00A3D4E4 /* Assets.xcassets */; };
 		781314D3201322CF00A3D4E4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 781314D1201322CF00A3D4E4 /* LaunchScreen.storyboard */; };
 		781314DF201323CE00A3D4E4 /* HomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 781314DE201323CE00A3D4E4 /* HomeVC.swift */; };
+		781314E1201353DD00A3D4E4 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 781314E0201353DD00A3D4E4 /* Constants.swift */; };
+		781314E32014B34000A3D4E4 /* CoinData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 781314E22014B34000A3D4E4 /* CoinData.swift */; };
+		7833F4C020A8257D009E9DAB /* Top100VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7833F4BF20A8257D009E9DAB /* Top100VC.swift */; };
+		7833F4C220A82595009E9DAB /* CryptoLoveVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7833F4C120A82595009E9DAB /* CryptoLoveVC.swift */; };
+		7833F4C420A82D27009E9DAB /* Top100Cell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7833F4C320A82D27009E9DAB /* Top100Cell.swift */; };
+		788D5477201B6C1800D2A2CE /* BaseVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 788D5476201B6C1800D2A2CE /* BaseVC.swift */; };
+		78B3B77A2018627200D69299 /* AddCoinVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78B3B7792018627200D69299 /* AddCoinVC.swift */; };
+		78B3B77C201887DC00D69299 /* CoinDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78B3B77B201887DC00D69299 /* CoinDetailVC.swift */; };
+		78B3B77E20188DE500D69299 /* ConverseColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78B3B77D20188DE500D69299 /* ConverseColor.swift */; };
+		78B3B7802018F89700D69299 /* CoinCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78B3B77F2018F89700D69299 /* CoinCell.swift */; };
+		78B3B7822019FE2200D69299 /* RoundButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78B3B7812019FE2200D69299 /* RoundButton.swift */; };
+		78B3B784201A054600D69299 /* RoundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78B3B783201A054600D69299 /* RoundView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +38,18 @@
 		781314D2201322CF00A3D4E4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		781314D4201322CF00A3D4E4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		781314DE201323CE00A3D4E4 /* HomeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeVC.swift; sourceTree = "<group>"; };
+		781314E0201353DD00A3D4E4 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		781314E22014B34000A3D4E4 /* CoinData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinData.swift; sourceTree = "<group>"; };
+		7833F4BF20A8257D009E9DAB /* Top100VC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Top100VC.swift; sourceTree = "<group>"; };
+		7833F4C120A82595009E9DAB /* CryptoLoveVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CryptoLoveVC.swift; sourceTree = "<group>"; };
+		7833F4C320A82D27009E9DAB /* Top100Cell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Top100Cell.swift; sourceTree = "<group>"; };
+		788D5476201B6C1800D2A2CE /* BaseVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseVC.swift; sourceTree = "<group>"; };
+		78B3B7792018627200D69299 /* AddCoinVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCoinVC.swift; sourceTree = "<group>"; };
+		78B3B77B201887DC00D69299 /* CoinDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinDetailVC.swift; sourceTree = "<group>"; };
+		78B3B77D20188DE500D69299 /* ConverseColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConverseColor.swift; sourceTree = "<group>"; };
+		78B3B77F2018F89700D69299 /* CoinCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinCell.swift; sourceTree = "<group>"; };
+		78B3B7812019FE2200D69299 /* RoundButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundButton.swift; sourceTree = "<group>"; };
+		78B3B783201A054600D69299 /* RoundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -70,11 +94,11 @@
 		781314C7201322CF00A3D4E4 /* WhenMoon */ = {
 			isa = PBXGroup;
 			children = (
-				781314DD2013234600A3D4E4 /* Resources */,
+				781314C8201322CF00A3D4E4 /* AppDelegate.swift */,
 				781314DA2013230900A3D4E4 /* Model */,
 				781314DB2013231900A3D4E4 /* View */,
 				781314DC2013232000A3D4E4 /* Controller */,
-				781314C8201322CF00A3D4E4 /* AppDelegate.swift */,
+				781314DD2013234600A3D4E4 /* Resources */,
 				781314CF201322CF00A3D4E4 /* Assets.xcassets */,
 				781314CC201322CF00A3D4E4 /* Main.storyboard */,
 				781314D1201322CF00A3D4E4 /* LaunchScreen.storyboard */,
@@ -86,6 +110,7 @@
 		781314DA2013230900A3D4E4 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				781314E22014B34000A3D4E4 /* CoinData.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -93,6 +118,10 @@
 		781314DB2013231900A3D4E4 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				78B3B77F2018F89700D69299 /* CoinCell.swift */,
+				78B3B7812019FE2200D69299 /* RoundButton.swift */,
+				78B3B783201A054600D69299 /* RoundView.swift */,
+				7833F4C320A82D27009E9DAB /* Top100Cell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -100,7 +129,12 @@
 		781314DC2013232000A3D4E4 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				788D5476201B6C1800D2A2CE /* BaseVC.swift */,
 				781314DE201323CE00A3D4E4 /* HomeVC.swift */,
+				78B3B7792018627200D69299 /* AddCoinVC.swift */,
+				78B3B77B201887DC00D69299 /* CoinDetailVC.swift */,
+				7833F4BF20A8257D009E9DAB /* Top100VC.swift */,
+				7833F4C120A82595009E9DAB /* CryptoLoveVC.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -108,6 +142,8 @@
 		781314DD2013234600A3D4E4 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				781314E0201353DD00A3D4E4 /* Constants.swift */,
+				78B3B77D20188DE500D69299 /* ConverseColor.swift */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -197,13 +233,16 @@
 			files = (
 			);
 			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
 			);
 			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-WhenMoon-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 		D48572BF3310576624F5D2FF /* [CP] Embed Pods Frameworks */ = {
@@ -212,9 +251,14 @@
 			files = (
 			);
 			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-WhenMoon/Pods-WhenMoon-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/ReachabilitySwift/Reachability.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Reachability.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -243,8 +287,20 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				78B3B7822019FE2200D69299 /* RoundButton.swift in Sources */,
+				788D5477201B6C1800D2A2CE /* BaseVC.swift in Sources */,
+				781314E32014B34000A3D4E4 /* CoinData.swift in Sources */,
+				7833F4C420A82D27009E9DAB /* Top100Cell.swift in Sources */,
 				781314C9201322CF00A3D4E4 /* AppDelegate.swift in Sources */,
+				78B3B7802018F89700D69299 /* CoinCell.swift in Sources */,
+				78B3B77E20188DE500D69299 /* ConverseColor.swift in Sources */,
+				7833F4C020A8257D009E9DAB /* Top100VC.swift in Sources */,
+				78B3B77C201887DC00D69299 /* CoinDetailVC.swift in Sources */,
+				7833F4C220A82595009E9DAB /* CryptoLoveVC.swift in Sources */,
 				781314DF201323CE00A3D4E4 /* HomeVC.swift in Sources */,
+				78B3B77A2018627200D69299 /* AddCoinVC.swift in Sources */,
+				781314E1201353DD00A3D4E4 /* Constants.swift in Sources */,
+				78B3B784201A054600D69299 /* RoundView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -385,7 +441,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = D9N528BE35;
 				INFOPLIST_FILE = WhenMoon/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.nagarajarivers.WhenMoon;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -402,7 +458,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = D9N528BE35;
 				INFOPLIST_FILE = WhenMoon/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.nagarajarivers.WhenMoon;
 				PRODUCT_NAME = "$(TARGET_NAME)";
