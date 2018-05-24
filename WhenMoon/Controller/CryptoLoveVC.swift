@@ -67,6 +67,7 @@ class CryptoLoveVC: BaseVC {
     
     @IBAction func rateApp(_ sender: Any) {
         // add link to app store in future version
+        UIApplication.shared.openURL(URL(string: appStoreURL)!)
     }
     
     
