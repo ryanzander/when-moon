@@ -1,20 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
     <device id="retina4_0" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
-        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
-    <customFonts key="customFonts">
-        <array key="Avenir.ttc">
-            <string>Avenir-Heavy</string>
-        </array>
-    </customFonts>
     <scenes>
         <!--View Controller-->
         <scene sceneID="EHf-IW-A2E">
@@ -63,15 +57,15 @@
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="dNB-OU-B38" firstAttribute="width" secondItem="37N-A9-oed" secondAttribute="height" multiplier="15:71" id="EEG-KP-SCu"/>
-                            <constraint firstItem="37N-A9-oed" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="H9b-R3-BtZ"/>
                             <constraint firstItem="Egq-F0-zjm" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="LUE-Rk-nE8"/>
                             <constraint firstItem="Egq-F0-zjm" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="P1b-XJ-RiK"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="dNB-OU-B38" secondAttribute="bottom" constant="100" id="Qso-wA-9yN"/>
                             <constraint firstItem="epn-IH-vwx" firstAttribute="leading" secondItem="Egq-F0-zjm" secondAttribute="leading" id="S0c-2n-hQe"/>
                             <constraint firstAttribute="trailing" secondItem="37N-A9-oed" secondAttribute="trailing" id="YNu-Sf-tUv"/>
                             <constraint firstItem="37N-A9-oed" firstAttribute="top" secondItem="Ze5-6b-2t3" secondAttribute="top" id="hBY-fd-v4k"/>
-                            <constraint firstItem="37N-A9-oed" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="hp9-9F-YSo"/>
                             <constraint firstAttribute="trailing" secondItem="xUe-gh-nb0" secondAttribute="trailing" constant="20" id="k4w-0E-uVt"/>
+                            <constraint firstItem="37N-A9-oed" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leading" id="lu0-oc-mFd"/>
+                            <constraint firstAttribute="bottom" secondItem="37N-A9-oed" secondAttribute="bottom" id="ogx-T9-lnu"/>
                             <constraint firstItem="xUe-gh-nb0" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="20" id="qug-pA-CwT"/>
                             <constraint firstItem="Egq-F0-zjm" firstAttribute="top" secondItem="epn-IH-vwx" secondAttribute="bottom" id="yuH-j2-GRh"/>
                             <constraint firstItem="dNB-OU-B38" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="z43-8m-pkg"/>

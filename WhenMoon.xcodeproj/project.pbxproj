@@ -168,7 +168,6 @@
 				781314C2201322CF00A3D4E4 /* Frameworks */,
 				781314C3201322CF00A3D4E4 /* Resources */,
 				D48572BF3310576624F5D2FF /* [CP] Embed Pods Frameworks */,
-				E1E59538949EE6235C949038 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -258,31 +257,18 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-WhenMoon/Pods-WhenMoon-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/IQKeyboardManagerSwift/IQKeyboardManagerSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/ReachabilitySwift/Reachability.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IQKeyboardManagerSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Reachability.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-WhenMoon/Pods-WhenMoon-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		E1E59538949EE6235C949038 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-WhenMoon/Pods-WhenMoon-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */

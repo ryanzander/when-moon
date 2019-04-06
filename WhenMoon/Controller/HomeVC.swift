@@ -359,9 +359,10 @@ class HomeVC: BaseVC, UITableViewDataSource, UITableViewDelegate {
     
 
     @objc private func refreshCoinData(sender: Any) {
-        
+   
         // update the coin data
         updateCoinData()
+     
     }
     
     

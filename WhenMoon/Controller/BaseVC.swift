@@ -11,10 +11,10 @@ import Reachability
 
 class BaseVC: UIViewController, UITextFieldDelegate {
     
-    var animatedDistance: CGFloat?
-    var keyboardHeight: CGFloat = 0.0
-    var textFieldRect: CGRect?
-    var isKeyboardOpening = false
+    //var animatedDistance: CGFloat?
+    //var keyboardHeight: CGFloat = 0.0
+    //var textFieldRect: CGRect?
+    //var isKeyboardOpening = false
     
     let reachability = Reachability()!
     let refreshControl = UIRefreshControl()
@@ -23,10 +23,13 @@ class BaseVC: UIViewController, UITextFieldDelegate {
         super.viewDidLoad()
 
         // detect when the keyboard will change frame
-        NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillShowOrHide), name: .UIKeyboardWillChangeFrame, object: nil)
+     //   NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillShowOrHide), name: .UIKeyboardWillChangeFrame, object: nil)
     }
 
     
+    
+    
+    /*
     @objc func keyboardWillShowOrHide(_ notification: Notification) {
         
         // make sure the keyboard is opening, not closing
@@ -61,25 +64,27 @@ class BaseVC: UIViewController, UITextFieldDelegate {
             }, completion: nil)
         }
     }
-    
+    */
  
     // dismiss keyboard if user touches the background area
     // in the Storyboard, change the view to UIControl and add TouchUpInside event
     @IBAction func hideKeyboard(_ sender: AnyObject) {
         
-        isKeyboardOpening = false
+       // isKeyboardOpening = false
         self.view.endEditing(true)
     }
+    
     
     
     // Dismiss keyboad with Done or Return button
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         
-        isKeyboardOpening = false
+       // isKeyboardOpening = false
         textField.resignFirstResponder()
         return true;
     }
     
+    /*
     
     // get the textFieldRect for the textField being edited
     func textFieldDidBeginEditing(_ textField: UITextField) {
@@ -98,6 +103,7 @@ class BaseVC: UIViewController, UITextFieldDelegate {
             self.view!.frame = viewFrame
         }, completion: nil)
     }
+ */
 
     
     // show a basic alert with "OK" to dismiss

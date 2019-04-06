@@ -1,15 +1,24 @@
 PODS:
   - Alamofire (4.6.0)
+  - IQKeyboardManagerSwift (6.2.0)
   - ReachabilitySwift (4.1.0)
 
 DEPENDENCIES:
   - Alamofire (~> 4.5)
+  - IQKeyboardManagerSwift
   - ReachabilitySwift
+
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - Alamofire
+    - IQKeyboardManagerSwift
+    - ReachabilitySwift
 
 SPEC CHECKSUMS:
   Alamofire: f41a599bd63041760b26d393ec1069d9d7b917f4
+  IQKeyboardManagerSwift: b07ccf9d8cafe993dcd6cb794eb4ba34611a0c4e
   ReachabilitySwift: 6849231cd4e06559f3b9ef4a97a0a0f96d41e09f
 
-PODFILE CHECKSUM: 690cbd8b6ff8d95eab0dcce7a686e1e3b8e45732
+PODFILE CHECKSUM: 0c65b793d23f2d7c4878cc4a1f43877b21902c5e
 
-COCOAPODS: 1.4.0
+COCOAPODS: 1.5.3

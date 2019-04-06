@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "CBD601E4F78465AC956FFE7040D31C02"
+               BlueprintIdentifier = "B4DB2B6256A4CCAC66F886221CE3BA67"
                BuildableName = "Pods_WhenMoon.framework"
                BlueprintName = "Pods-WhenMoon"
                ReferencedContainer = "container:Pods.xcodeproj">
@@ -26,7 +26,6 @@
       buildConfiguration = "Debug"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
-      language = ""
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
       </Testables>
@@ -37,7 +36,6 @@
       buildConfiguration = "Debug"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
-      language = ""
       launchStyle = "0"
       useCustomWorkingDirectory = "NO"
       ignoresPersistentStateOnLaunch = "NO"
@@ -47,7 +45,7 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "CBD601E4F78465AC956FFE7040D31C02"
+            BlueprintIdentifier = "B4DB2B6256A4CCAC66F886221CE3BA67"
             BuildableName = "Pods_WhenMoon.framework"
             BlueprintName = "Pods-WhenMoon"
             ReferencedContainer = "container:Pods.xcodeproj">
