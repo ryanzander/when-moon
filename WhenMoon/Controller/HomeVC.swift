@@ -27,34 +27,29 @@ class HomeVC: BaseVC, UITableViewDataSource, UITableViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        setupNavBar()
+        setupTableView()
+    }
+
+    override func viewDidAppear(_ animated: Bool) {
+        updateCoinData()
+    }
+    
+    func setupNavBar() {
         // navigation bar, set once and is used in rest of app
         let nav = self.navigationController?.navigationBar
         nav?.barStyle = UIBarStyle.black
         nav?.barTintColor = darkSky
         nav?.tintColor = banana
-        
-        // add logo to nav bar
-        // need to put this in every view controller
-        let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 112, height: 32))
-        imageView.contentMode = .scaleAspectFit
-        imageView.image = UIImage(named: "WhenMoonLogo.png")
-        let logoView: UIView = UIView(frame: CGRect(x: 0, y: 0, width: imageView.frame.size.width, height: imageView.frame.size.height))
-        logoView.addSubview(imageView)
-        navigationItem.titleView = logoView
-        
+    }
+    
+    func setupTableView() {
         //  remove annoying space in tableview seperators
         tableView.separatorInset = .zero
         
         // Configure Refresh Control
         tableView.refreshControl = self.refreshControl
         self.refreshControl.addTarget(self, action: #selector(self.refreshCoinData(sender:)), for: .valueChanged)
-    
-    }
-
-    
-    override func viewDidAppear(_ animated: Bool) {
-        
-        updateCoinData()
     }
     
     

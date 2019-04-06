@@ -37,15 +37,7 @@ class CoinDetailVC: BaseVC {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // add logo to nav bar
-        // need to put this in every view controller
-        let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 112, height: 32))
-        imageView.contentMode = .scaleAspectFit
-        imageView.image = UIImage(named: "WhenMoonLogo.png")
-        let logoView: UIView = UIView(frame: CGRect(x: 0, y: 0, width: imageView.frame.size.width, height: imageView.frame.size.height))
-        logoView.addSubview(imageView)
-        navigationItem.titleView = logoView
-        
+
     
         // set up the UI
         nameLbl.text = coinData.name
