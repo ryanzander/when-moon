@@ -19,6 +19,7 @@
 		7833F4C220A82595009E9DAB /* CryptoLoveVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7833F4C120A82595009E9DAB /* CryptoLoveVC.swift */; };
 		7833F4C420A82D27009E9DAB /* Top100Cell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7833F4C320A82D27009E9DAB /* Top100Cell.swift */; };
 		788D5477201B6C1800D2A2CE /* BaseVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 788D5476201B6C1800D2A2CE /* BaseVC.swift */; };
+		78B122E022592A3200CCB38B /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78B122DF22592A3200CCB38B /* NetworkService.swift */; };
 		78B3B77A2018627200D69299 /* AddCoinVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78B3B7792018627200D69299 /* AddCoinVC.swift */; };
 		78B3B77C201887DC00D69299 /* CoinDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78B3B77B201887DC00D69299 /* CoinDetailVC.swift */; };
 		78B3B77E20188DE500D69299 /* ConverseColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78B3B77D20188DE500D69299 /* ConverseColor.swift */; };
@@ -44,6 +45,7 @@
 		7833F4C120A82595009E9DAB /* CryptoLoveVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CryptoLoveVC.swift; sourceTree = "<group>"; };
 		7833F4C320A82D27009E9DAB /* Top100Cell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Top100Cell.swift; sourceTree = "<group>"; };
 		788D5476201B6C1800D2A2CE /* BaseVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseVC.swift; sourceTree = "<group>"; };
+		78B122DF22592A3200CCB38B /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 		78B3B7792018627200D69299 /* AddCoinVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCoinVC.swift; sourceTree = "<group>"; };
 		78B3B77B201887DC00D69299 /* CoinDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinDetailVC.swift; sourceTree = "<group>"; };
 		78B3B77D20188DE500D69299 /* ConverseColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConverseColor.swift; sourceTree = "<group>"; };
@@ -99,6 +101,7 @@
 				781314DB2013231900A3D4E4 /* View */,
 				781314DC2013232000A3D4E4 /* Controller */,
 				781314DD2013234600A3D4E4 /* Resources */,
+				78B122E122592A4900CCB38B /* Service */,
 				781314CF201322CF00A3D4E4 /* Assets.xcassets */,
 				781314CC201322CF00A3D4E4 /* Main.storyboard */,
 				781314D1201322CF00A3D4E4 /* LaunchScreen.storyboard */,
@@ -148,6 +151,14 @@
 			path = Resources;
 			sourceTree = "<group>";
 		};
+		78B122E122592A4900CCB38B /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				78B122DF22592A3200CCB38B /* NetworkService.swift */,
+			);
+			path = Service;
+			sourceTree = "<group>";
+		};
 		9880AE055C4F3FE258274C23 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -190,6 +201,7 @@
 				TargetAttributes = {
 					781314C4201322CF00A3D4E4 = {
 						CreatedOnToolsVersion = 9.2;
+						LastSwiftMigration = 1020;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.GameCenter = {
@@ -288,6 +300,7 @@
 				7833F4C020A8257D009E9DAB /* Top100VC.swift in Sources */,
 				78B3B77C201887DC00D69299 /* CoinDetailVC.swift in Sources */,
 				7833F4C220A82595009E9DAB /* CryptoLoveVC.swift in Sources */,
+				78B122E022592A3200CCB38B /* NetworkService.swift in Sources */,
 				781314DF201323CE00A3D4E4 /* HomeVC.swift in Sources */,
 				78B3B77A2018627200D69299 /* AddCoinVC.swift in Sources */,
 				781314E1201353DD00A3D4E4 /* Constants.swift in Sources */,
@@ -440,7 +453,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
@@ -461,7 +474,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;

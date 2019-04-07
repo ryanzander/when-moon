@@ -57,28 +57,44 @@ class HomeVC: BaseVC, UITableViewDataSource, UITableViewDelegate {
         
         // we should refresh the local myCoins and myCoinsTotals from UserDefaults here
         // re-init both arrays to clear them out
-        self.myCoins = [String]()
-        self.myCoinsTotals = [Dictionary<String, String>]()
+       // self.myCoins = [String]()
+       // self.myCoinsTotals = [Dictionary<String, String>]()
         
-        if let tempArray = defaults.array(forKey: "myCoins") as? [String] {
+        if let mySavedCoins = defaults.array(forKey: "myCoins") as? [String] {
+            myCoins = mySavedCoins
+        } else {
+            myCoins = [String]()
+        }
+        
+       /* if let tempArray = defaults.array(forKey: "myCoins") as? [String] {
             for coin in tempArray {
                 self.myCoins.append(coin)
             }
+            
+            
+            
         } else {
             // no existing myCoins
+        }*/
+        
+        if let mySavedCoinsTotals = defaults.array(forKey: "myCoinsTotals") as? [Dictionary<String, String>] {
+            myCoinsTotals = mySavedCoinsTotals
+            
+        } else {
+            myCoinsTotals = [Dictionary<String, String>]()
         }
         
-        if let tempTotalsArray = defaults.array(forKey: "myCoinsTotals") as? [Dictionary<String, String>] {
-            
-            for coinTotal in tempTotalsArray {
-                self.myCoinsTotals.append(coinTotal)
-            }
-        } else {
-            // no existing myCoinsTotals
-        }
+//        if let tempTotalsArray = defaults.array(forKey: "myCoinsTotals") as? [Dictionary<String, String>] {
+//
+//            for coinTotal in tempTotalsArray {
+//                self.myCoinsTotals.append(coinTotal)
+//            }
+//        } else {
+//            // no existing myCoinsTotals
+//        }
         
         // get the coin data if we have an internet connection
-        if (self.reachable()){
+    //    if (self.reachable()){
             
             // first get the list of all coins
             self.getAllCoins {
@@ -89,11 +105,11 @@ class HomeVC: BaseVC, UITableViewDataSource, UITableViewDelegate {
                 self.getPriceData()
             }
             
-        }  else {
-            // not online
-            // show alert
-            showAlertWith(title: "No Connection", message: "Please connect your device to WiFi to use When Moon??? app")
-        }
+//        }  else {
+//            // not online
+//            // show alert
+//            showAlertWith(title: "No Connection", message: "Please connect your device to WiFi to use When Moon??? app")
+//        }
     }
     
     
@@ -146,7 +162,7 @@ class HomeVC: BaseVC, UITableViewDataSource, UITableViewDelegate {
                             
                             if (id == coinID) {
                                 
-                                amount = coin["amount"] as String!
+                                amount = coin["amount"] as String? ?? "0.0"
                             }
                         }
                         
