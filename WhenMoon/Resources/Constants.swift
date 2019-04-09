@@ -21,6 +21,8 @@ let MEDIUM_IMG_BASE_URL = "https://s2.coinmarketcap.com/static/img/coins/64x64/"
 let LARGE_IMG_BASE_URL = "https://s2.coinmarketcap.com/static/img/coins/128x128/"
 
 
+// TODO: Migrate to the new coinmarketcap api https://pro.coinmarketcap.com/migrate/
+
 let COIN_LIST_URL = "https://api.coinmarketcap.com/v2/listings/"
 let TICKER_URL = "https://api.coinmarketcap.com/v2/ticker/"
 // by default, TICKER_URL gets info on top 100 coins
@@ -42,5 +44,5 @@ let nebulaGray = ConverseColor().hexStringToUIColor("#4B466F")
 
 let defaults = UserDefaults.standard
 
-typealias DownloadComplete = () -> ()
+//typealias DownloadComplete = () -> ()
 

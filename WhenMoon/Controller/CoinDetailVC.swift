@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import Alamofire
+//import Alamofire
 
 class CoinDetailVC: BaseVC {
     
@@ -30,94 +30,107 @@ class CoinDetailVC: BaseVC {
     var plusOn = false
     var deleteOn = false
     var saveOn = false
-    var txAmount = ""
+    var txAmount = "" //amount of the transaction
     
     var coinData: CoinData!
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-
+        setupUI()
+    }
     
-        // set up the UI
-        nameLbl.text = coinData.name
-        symbolLbl.text = coinData.symbol
+    
+    func setupUI() {
         
-        // Amount
-        // get NSNumber from the string
-        let amountDouble = Double(coinData.amount)
-        let amountNumber = NSNumber(value: amountDouble!)
-        
-        // format to display as 0.145
-        let amountFormatter = NumberFormatter()
-        amountFormatter.maximumFractionDigits = 8
-        amountFormatter.numberStyle = .decimal
-        amountFormatter.usesGroupingSeparator = true
-        
-        let amountString = amountFormatter.string(from: amountNumber)
-       
-        amountLbl.text = "\(amountString!) \(coinData.symbol)"
-        
-        // Price
-        priceLbl.text = "$\(coinData.priceUSD)"
-        
-        // Change
-        // set color of %change label
-        let changeDouble = Double(coinData.percentChange24H)
-        var changeString = ""
-        if (changeDouble! < 0.0) {
-            changeLbl.textColor = darkRed
-            changeString = "\(coinData.percentChange24H)%"
-        } else {
-            changeLbl.textColor = darkGreen
-            changeString = "+\(coinData.percentChange24H)%"
-        }
-        
-        changeLbl.text = changeString
-        
-        // Value
-        // get NSNumber from the string
-        let valueDouble = Double(coinData.value)
-        let valueNumber = NSNumber(value: valueDouble!)
-        
-        // format to display as "$1,000.00"
-        let dollarFormatter = NumberFormatter()
-        dollarFormatter.usesGroupingSeparator = true
-        dollarFormatter.numberStyle = .currency
-        dollarFormatter.locale = Locale(identifier: "en_US")
-        let valueString = dollarFormatter.string(from: valueNumber)
-        
-        valueLbl.text = valueString
-        
-        // Edit Amount area
-        editLbl.isHidden = false
-        textField.isHidden = true
-        
-        minusBtn.isEnabled = true
-        plusBtn.isEnabled = true
-        deleteBtn.isEnabled = true
-        saveBtn.isEnabled = false // nothing to save yet
-        
-        minusBtn.backgroundColor = nebulaGray
-        plusBtn.backgroundColor = nebulaGray
-        deleteBtn.backgroundColor = nebulaGray
-        saveBtn.backgroundColor = nebulaGray
-        
-        
-        // Coin logo image
-        // The image to dowload
-        let imgURL = URL(string:"\(LARGE_IMG_BASE_URL)\(coinData.id).png")!
-        
-        // Use Alamofire to download the image
-        Alamofire.request(imgURL).responseData { (response) in
+        // update UI on main thread
+        DispatchQueue.main.async {
             
-            if response.error == nil {
-                print(response.result)
-                
-                // Show the downloaded image:
-                if let data = response.data {
-                    self.imgView.image = UIImage(data: data)
+            guard let coinData = self.coinData else { return }
+        
+            // name and symbol
+            self.nameLbl.text = coinData.name
+            self.symbolLbl.text = coinData.symbol
+        
+            // Amount
+            let symbol = self.coinData.symbol
+            if let amountDouble = Double(coinData.amount) {
+                if let amount = amountDouble.decimalString(maxFractionDigits: 8) {
+                    self.amountLbl.text = "\(amount) \(symbol)"
                 }
+            }
+        
+            // Price
+            
+            
+            
+            if coinData.priceUSD > 1000.0 {
+                if let dollarString = coinData.priceUSD.dollarString() {
+                    self.priceLbl.text = dollarString
+                }
+            } else if coinData.priceUSD > 10.0 {
+            
+                if let price = coinData.priceUSD.decimalString(maxFractionDigits: 4) {
+                self.priceLbl.text = "$\(price)"
+                }
+                
+            } else {
+                if let price = coinData.priceUSD.decimalString(maxFractionDigits: 6) {
+                    self.priceLbl.text = "$\(price)"
+                }
+            }
+            //self.priceLbl.text = "$\(coinData.priceUSD)"
+        
+            // set text and color of %change label
+            var changeString = ""
+            let change = coinData.percentChange24H
+            if (change < 0.0) {
+                self.changeLbl.textColor = darkRed
+                changeString = "\(coinData.percentChange24H)%"
+            } else {
+                self.changeLbl.textColor = darkGreen
+                changeString = "+\(coinData.percentChange24H)%"
+            }
+            self.changeLbl.text = changeString
+        
+            // value
+            let value = coinData.value
+            self.valueLbl.text = value.dollarString()
+        
+            // Edit Amount area
+            self.editLbl.isHidden = false
+            self.textField.isHidden = true
+        
+            self.minusBtn.isEnabled = true
+            self.plusBtn.isEnabled = true
+            self.deleteBtn.isEnabled = true
+            self.saveBtn.isEnabled = false // nothing to save yet
+        
+            self.minusBtn.backgroundColor = nebulaGray
+            self.plusBtn.backgroundColor = nebulaGray
+            self.deleteBtn.backgroundColor = nebulaGray
+            self.saveBtn.backgroundColor = nebulaGray
+        
+        
+            // Coin logo image
+            // The image to dowload
+            if let url = URL(string:"\(LARGE_IMG_BASE_URL)\(coinData.idNumber).png") {
+            
+                URLSession.shared.dataTask(with: url) { (data, response, error) in
+                
+                    if let error = error {
+                        print("URL error: ", error.localizedDescription)
+                        return
+                    }
+                
+                    guard let data = data else { return }
+                    guard let img = UIImage(data: data) else { return }
+                
+                    // update UI on main thread
+                    DispatchQueue.main.async {
+                        self.imgView.image = img
+                    }
+                }.resume()
             }
         }
     }
@@ -173,7 +186,6 @@ class CoinDetailVC: BaseVC {
     }
     
 
-    
     @IBAction func deleteTouched(_ sender: Any) {
         
         // disable save
@@ -305,50 +317,18 @@ class CoinDetailVC: BaseVC {
     
     
     func deleteCoin(){
-        
-        print("Deleting \(self.coinData.symbol)")
-        
-        // delete from myCoins and myCoinsTotals
-        var tempArray = [String]()
-        var tempTotalsArray = [Dictionary<String, String>]()
+        // delete from myCoins and myCoinsTotals if they exist
+        let idString = "\(self.coinData.idNumber)"
        
-        // see if we have myCoins already
         if let myCoins = defaults.array(forKey: "myCoins") as? [String] {
-            
-            for coin in myCoins {
-                
-                if (coin == self.coinData.id){
-                    // don't add the coin we want to delete
-                } else {
-                    // add all other coins to the tempArray
-                    tempArray.append(coin)
-                }
-            }
-            
-            if let myCoinsTotals = defaults.array(forKey: "myCoinsTotals") as? [Dictionary<String, String>] {
-                
-                for coinTotal in myCoinsTotals {
-                    
-                    if let id = coinTotal["id"] {
-                        
-                        if (id == self.coinData.id){
-                            // don't add the coin we want to delete
-                        } else {
-                            // add all other coins
-                            tempTotalsArray.append(coinTotal)
-                        }
-                    }
-                }
-            }
-            
-        } else {
-            // no myCoins array
-            // so nothing to delete
+            let myNewCoins = myCoins.filter { $0 != idString }
+            defaults.set(myNewCoins, forKey:"myCoins")
         }
-        
-        // save the new arrays to defaults
-        defaults.set(tempArray, forKey:"myCoins")
-        defaults.set(tempTotalsArray, forKey:"myCoinsTotals")
+            
+        if let myCoinsTotals = defaults.array(forKey: "myCoinsTotals") as? [Dictionary<String, String>] {
+            let myNewCoinsTotals = myCoinsTotals.filter { $0["id"] != idString }
+            defaults.set(myNewCoinsTotals, forKey:"myCoinsTotals")
+        }
         
         // navigate back to home screen and refresh data
         performSegue(withIdentifier: "unwindFromCoinDetailVC", sender: self)
@@ -362,9 +342,9 @@ class CoinDetailVC: BaseVC {
         
         if (minusOn) {
             
-            let startAmount = Double(self.coinData.amount)
-            let minusAmount = Double(self.txAmount)
-            let newTotal = startAmount! - minusAmount!
+            guard let startAmount = Double(self.coinData.amount) else { return }
+            guard let minusAmount = Double(self.txAmount) else { return }
+            let newTotal = startAmount - minusAmount
             amountString = "\(newTotal)"
             
             // check that the new amount is not less than zero
@@ -386,75 +366,53 @@ class CoinDetailVC: BaseVC {
             
         } else if (plusOn){
             
-            let startAmount = Double(self.coinData.amount)
-            let plusAmount = Double(self.txAmount)
-            let newTotal = startAmount! + plusAmount!
+            guard let startAmount = Double(self.coinData.amount) else { return }
+            guard let plusAmount = Double(self.txAmount) else { return }
+            let newTotal = startAmount + plusAmount
             amountString = "\(newTotal)"
         }
         
         // save to myCoins and myCoinsTotals
-        var tempArray = [String]()
-        var tempTotalsArray = [Dictionary<String, String>]()
-        let coinDic = ["id": "\(self.coinData.id)", "amount": amountString]
-        
+        var newCoins = [String]()
+        var newTotals = [Dictionary<String, String>]()
+        let idString = "\(self.coinData.idNumber)"
+        let coinDic = ["id": idString, "amount": amountString]
+       
         // see if we have myCoins already
         if let myCoins = defaults.array(forKey: "myCoins") as? [String] {
-            
-            for coin in myCoins {
-                tempArray.append(coin)
-            }
-            
             if let myCoinsTotals = defaults.array(forKey: "myCoinsTotals") as? [Dictionary<String, String>] {
                 
-                for coinTotal in myCoinsTotals {
+                // see if this coin is already in myCoins
+                if (myCoins.contains(idString)) {
+                
+                    // already have this coin so update its total
+                    newTotals = myCoinsTotals.filter { $0["id"] != "\(self.coinData.idNumber)" }
+                    newTotals.append(coinDic)
+                    defaults.set(newTotals, forKey:"myCoinsTotals")
                     
-                    if let id = coinTotal["id"] {
-                        
-                        if (id == self.coinData.id){
-                            // don't add our current coin here
-                        } else {
-                             tempTotalsArray.append(coinTotal)
-                        }
-                    }
+                } else {
+                    // just add the new coin
+                    newCoins = myCoins
+                    newCoins.append(idString)
+                    defaults.set(newCoins, forKey:"myCoins")
+                    newTotals = myCoinsTotals
+                    newTotals.append(coinDic)
+                    defaults.set(newTotals, forKey:"myCoinsTotals")
                 }
-            }
-        
-            if (tempArray.contains(self.coinData.id)) {
-                // already has this coin
-                // so we just add coinDic so the amount is updated
-                tempTotalsArray.append(coinDic)
-     
-            } else {
-                tempArray.append(self.coinData.id)
-                tempTotalsArray.append(coinDic)
             }
             
         } else {
-            // no myCoins array
-            tempArray.append(self.coinData.id)
-            tempTotalsArray.append(coinDic)
+            // myCoins doesn't exist yet, so we'll create it
+            newCoins.append(idString)
+            defaults.set(newCoins, forKey:"myCoins")
+            newTotals.append(coinDic)
+            defaults.set(newTotals, forKey:"myCoinsTotals")
         }
-        
-        // save the new arrays to defaults
-        defaults.set(tempArray, forKey:"myCoins")
-        defaults.set(tempTotalsArray, forKey:"myCoinsTotals")
-        
+            
+       
         // navigate back to home screen and refresh data
         performSegue(withIdentifier: "unwindFromCoinDetailVC", sender: self)
-        
+ 
     }
-
-    
-    
-    
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }

@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import Alamofire
+//import Alamofire
 
 class AddCoinVC: BaseVC, UITableViewDataSource, UITableViewDelegate, UISearchControllerDelegate {
     
@@ -23,8 +23,6 @@ class AddCoinVC: BaseVC, UITableViewDataSource, UITableViewDelegate, UISearchCon
     override func viewDidLoad() {
         super.viewDidLoad()
         
-   
-
         // Setup the Search Controller
         searchController.searchResultsUpdater = self
         searchController.obscuresBackgroundDuringPresentation = false
@@ -98,7 +96,7 @@ class AddCoinVC: BaseVC, UITableViewDataSource, UITableViewDelegate, UISearchCon
         
         // if the selectedCoin exists in myCoins, we won't double-add it
         for coin in myCoins {
-            if coin == self.selectedCoin.id {
+            if coin == "\(self.selectedCoin.idNumber)" {
                 
                 showAlertWith(title: "Duplicate coin", message: "You already have \(selectedCoin.name) in your list of coins")
                 
@@ -113,58 +111,53 @@ class AddCoinVC: BaseVC, UITableViewDataSource, UITableViewDelegate, UISearchCon
     
     func getCoinData() {
         
-        // get the coin data if we have an internet connection
-        if (self.reachable()){
+        let coinID = selectedCoin.idNumber
+        let coinURL = "\(TICKER_URL)\(coinID)/"
+        guard let url = URL(string: coinURL) else { return }
+        
+        getCoinDataFor(url: url, completion:  { result in
             
-            let coinID = selectedCoin.id
-            let coinURL = "\(TICKER_URL)\(coinID)/"
-            
-            Alamofire.request(coinURL).responseJSON { (response) in
+            switch result {
+            case .success(let coinData):
+                // reset selectedCoin with the full data
+                self.selectedCoin = coinData
                 
-                let result = response.result
-                    
-                if let responseDic = result.value as? Dictionary<String, AnyObject> {
-                        
-                    if let coinDic = responseDic["data"] as? Dictionary<String, AnyObject> {
-                        
-                        print(coinDic)
-                            
-                        let name = self.selectedCoin.name
-                        let id = self.selectedCoin.id
-                        let symbol = self.selectedCoin.symbol
-                            
-                        let quotes = coinDic["quotes"] as! Dictionary<String, AnyObject>
-                        let USD = quotes["USD"] as! Dictionary<String, AnyObject>
-                        
-                        let price = USD["price"] as! Double
-                        let priceUSD = "\(price)"
-                        var change = 0.0
-                        if let changeDouble = USD["percent_change_24h"] as? Double {
-                            change = changeDouble
-                        }
-                        
-                        let percentChange24H = "\(change)"
-                        let amount = "0" //we are adding the coin, so amount is 0
-                        let value = "0" // we are adding the coin, so current value is 0
-                        let valueDouble = 0.0 // we are adding the coin, so current value is 0
-                            
-                        let coinData = CoinData(name: name, symbol: symbol, id: id, priceUSD: priceUSD, percentChange24H: percentChange24H, amount: amount, value: value, valueDouble: valueDouble, rank: 0)
-                            
-                        // reset selectedCoin with the full data
-                        self.selectedCoin = coinData
-                            
-                        self.performSegue(withIdentifier: "goToCoinDetailVC", sender: self)
-                    }
+                // back to main thread
+                DispatchQueue.main.async {
+                    self.performSegue(withIdentifier: "goToCoinDetailVC", sender: self)
                 }
+                
+            case .failure(let error):
+                let message = error.localizedDescription
+                self.showAlertWith(title: "Error", message: message)
             }
-       
-        }  else {
-            // not online
-            // show alert
-            showAlertWith(title: "No Connection", message: "Please connect your device to WiFi to use When Moon??? app")
-        }
+        })
     }
     
+    
+    func getCoinDataFor(url: URL, completion: @escaping (Result<CoinData, Error>) -> ()) {
+        
+        URLSession.shared.dataTask(with: url) { (data, response, error) in
+            
+            if let error = error {
+                completion(.failure(error))
+                return
+            }
+            
+            // success
+            guard let data = data else { return }
+            do {
+                guard let responseDic = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] else { return }
+                guard let coinDic = responseDic["data"] as? [String: Any] else { return }
+                
+                let coinData = CoinData.init(dic: coinDic)
+                completion(.success(coinData))
+                
+            } catch let jsonError {
+                completion(.failure(jsonError))
+            }
+        }.resume()
+    }
     
     
     // MARK: - Search Bar

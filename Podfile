@@ -7,8 +7,6 @@ target 'WhenMoon' do
 
   # Pods for WhenMoon
 
-pod 'Alamofire', '~> 4.5'
-pod 'ReachabilitySwift'
 pod 'IQKeyboardManagerSwift'
 
 

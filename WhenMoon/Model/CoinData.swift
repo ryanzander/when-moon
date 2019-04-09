@@ -8,8 +8,41 @@
 
 import Foundation
 
+
+struct CoinListData {
+    
+    let idNumber: Int
+    let name: String
+    let symbol: String
+    
+    init(dic: [String: Any]) {
+        
+        let idNumber = dic["id"] as? Int ?? 0
+        let name = dic["name"] as? String ?? ""
+        let symbol = dic["symbol"] as? String ?? ""
+    
+        self.idNumber = idNumber
+        self.name = name
+        self.symbol = symbol
+    }
+}
+
+
+
+//struct CoinData {
 class CoinData: NSObject {
     
+    var name: String
+    var symbol: String
+    var idNumber: Int
+    var priceUSD: Double
+    var percentChange24H: Double
+    var amount: String // amount is String to control the digits exactly
+    var value: Double
+  //  var valueDouble: Double
+    var rank: Int
+    
+    /*
     private var _name: String!
     private var _symbol: String!
     private var _id: String!
@@ -82,19 +115,37 @@ class CoinData: NSObject {
         }
         return _rank
     }
+    */
     
-    
-    init(name: String, symbol: String, id: String, priceUSD: String, percentChange24H: String, amount: String, value: String, valueDouble: Double, rank: Int) {
+    init(dic: [String: Any]) {
+  //  init(name: String, symbol: String, idNumber: Int, priceUSD: String, percentChange24H: String, amount: String, value: String, valueDouble: Double, rank: Int) {
         
-        _name = name
-        _symbol = symbol
-        _id = id
-        _priceUSD = priceUSD
-        _percentChange24H = percentChange24H
-        _amount = amount
-        _value = value
-        _valueDouble = valueDouble
-        _rank = rank
+        let name = dic["name"] as? String ?? ""
+        let symbol = dic["symbol"] as? String ?? ""
+        let idNumber = dic["id"] as? Int ?? 0
+        
+        var price = 0.0
+        var change = 0.0
+        if let quotes = dic["quotes"] as? [String: Any] {
+            if let usd = quotes["USD"] as? [String: Any] {
+                price = usd["price"] as? Double ?? 0.0
+                change = usd["percent_change_24h"] as? Double ?? 0.0
+            }
+        }
+        
+        let rank = dic["rank"] as? Int ?? 0
+        
+        
+        
+        self.name = name
+        self.symbol = symbol
+        self.idNumber = idNumber
+        self.priceUSD = price
+        self.percentChange24H = change
+        self.amount = "0.0"
+        self.value = 0.0
+     //   self.valueDouble = valueDouble
+        self.rank = rank
     }
     
 }

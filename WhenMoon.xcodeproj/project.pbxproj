@@ -19,7 +19,7 @@
 		7833F4C220A82595009E9DAB /* CryptoLoveVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7833F4C120A82595009E9DAB /* CryptoLoveVC.swift */; };
 		7833F4C420A82D27009E9DAB /* Top100Cell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7833F4C320A82D27009E9DAB /* Top100Cell.swift */; };
 		788D5477201B6C1800D2A2CE /* BaseVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 788D5476201B6C1800D2A2CE /* BaseVC.swift */; };
-		78B122E022592A3200CCB38B /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78B122DF22592A3200CCB38B /* NetworkService.swift */; };
+		78B122E3225B209300CCB38B /* Double+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78B122E2225B209300CCB38B /* Double+Extensions.swift */; };
 		78B3B77A2018627200D69299 /* AddCoinVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78B3B7792018627200D69299 /* AddCoinVC.swift */; };
 		78B3B77C201887DC00D69299 /* CoinDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78B3B77B201887DC00D69299 /* CoinDetailVC.swift */; };
 		78B3B77E20188DE500D69299 /* ConverseColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78B3B77D20188DE500D69299 /* ConverseColor.swift */; };
@@ -45,7 +45,7 @@
 		7833F4C120A82595009E9DAB /* CryptoLoveVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CryptoLoveVC.swift; sourceTree = "<group>"; };
 		7833F4C320A82D27009E9DAB /* Top100Cell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Top100Cell.swift; sourceTree = "<group>"; };
 		788D5476201B6C1800D2A2CE /* BaseVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseVC.swift; sourceTree = "<group>"; };
-		78B122DF22592A3200CCB38B /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
+		78B122E2225B209300CCB38B /* Double+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+Extensions.swift"; sourceTree = "<group>"; };
 		78B3B7792018627200D69299 /* AddCoinVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCoinVC.swift; sourceTree = "<group>"; };
 		78B3B77B201887DC00D69299 /* CoinDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinDetailVC.swift; sourceTree = "<group>"; };
 		78B3B77D20188DE500D69299 /* ConverseColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConverseColor.swift; sourceTree = "<group>"; };
@@ -100,8 +100,8 @@
 				781314DA2013230900A3D4E4 /* Model */,
 				781314DB2013231900A3D4E4 /* View */,
 				781314DC2013232000A3D4E4 /* Controller */,
+				78B122E4225B60ED00CCB38B /* Extensions */,
 				781314DD2013234600A3D4E4 /* Resources */,
-				78B122E122592A4900CCB38B /* Service */,
 				781314CF201322CF00A3D4E4 /* Assets.xcassets */,
 				781314CC201322CF00A3D4E4 /* Main.storyboard */,
 				781314D1201322CF00A3D4E4 /* LaunchScreen.storyboard */,
@@ -151,12 +151,12 @@
 			path = Resources;
 			sourceTree = "<group>";
 		};
-		78B122E122592A4900CCB38B /* Service */ = {
+		78B122E4225B60ED00CCB38B /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				78B122DF22592A3200CCB38B /* NetworkService.swift */,
+				78B122E2225B209300CCB38B /* Double+Extensions.swift */,
 			);
-			path = Service;
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 		9880AE055C4F3FE258274C23 /* Frameworks */ = {
@@ -268,15 +268,11 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-WhenMoon/Pods-WhenMoon-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/IQKeyboardManagerSwift/IQKeyboardManagerSwift.framework",
-				"${BUILT_PRODUCTS_DIR}/ReachabilitySwift/Reachability.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IQKeyboardManagerSwift.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Reachability.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -298,9 +294,9 @@
 				78B3B7802018F89700D69299 /* CoinCell.swift in Sources */,
 				78B3B77E20188DE500D69299 /* ConverseColor.swift in Sources */,
 				7833F4C020A8257D009E9DAB /* Top100VC.swift in Sources */,
+				78B122E3225B209300CCB38B /* Double+Extensions.swift in Sources */,
 				78B3B77C201887DC00D69299 /* CoinDetailVC.swift in Sources */,
 				7833F4C220A82595009E9DAB /* CryptoLoveVC.swift in Sources */,
-				78B122E022592A3200CCB38B /* NetworkService.swift in Sources */,
 				781314DF201323CE00A3D4E4 /* HomeVC.swift in Sources */,
 				78B3B77A2018627200D69299 /* AddCoinVC.swift in Sources */,
 				781314E1201353DD00A3D4E4 /* Constants.swift in Sources */,

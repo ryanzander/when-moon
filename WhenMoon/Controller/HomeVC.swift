@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import Alamofire
 
 class HomeVC: BaseVC, UITableViewDataSource, UITableViewDelegate {
     
@@ -18,7 +17,7 @@ class HomeVC: BaseVC, UITableViewDataSource, UITableViewDelegate {
     var myCoins = [String]() // with v2, this needs to be array of coin IDs
     var myCoinsTotals = [Dictionary<String, String>]()
     var myCoinsData = [CoinData]()
-    var allCoinsList = [CoinData]()
+    var allCoinsList = [CoinData]() //[CoinListData]()   //[CoinData]()
     var top100Data = [CoinData]()
     var selectedCoin: CoinData!
     var totalValue = 0.0
@@ -97,13 +96,35 @@ class HomeVC: BaseVC, UITableViewDataSource, UITableViewDelegate {
     //    if (self.reachable()){
             
             // first get the list of all coins
-            self.getAllCoins {
+        
+        
+        
+        
+        getAllCoins() { result in
+            
+            switch result {
+            case .success(let coins):
+              
+                // we have the list of all coins
+                print("all coins count: \(coins.count)")
+                self.allCoinsList = coins
                 
-                print("we got all coins")
+                // now we need the price data for each coin in myCoins
+                self.getPriceData()
+                
+            case .failure(let error):
+                let message = error.localizedDescription
+                self.showAlertWith(title: "Error", message: message)
+            }
+        }
+        
+  //          self.getAllCoins {
+                
+ //               print("we got all coins")
                 
                 // we need the price data for each coin in myCoins
-                self.getPriceData()
-            }
+//                self.getPriceData()
+ //           }
             
 //        }  else {
 //            // not online
@@ -112,7 +133,7 @@ class HomeVC: BaseVC, UITableViewDataSource, UITableViewDelegate {
 //        }
     }
     
-    
+    /*
     func getPriceData() {
         
         // clear out myCoinsData first before re-adding to it
@@ -189,8 +210,9 @@ class HomeVC: BaseVC, UITableViewDataSource, UITableViewDelegate {
             }
         }
     }
+    */
     
-    
+    /*
     func updateCoinValues() {
 
         // after success getting the data
@@ -263,8 +285,214 @@ class HomeVC: BaseVC, UITableViewDataSource, UITableViewDelegate {
         self.refreshControl.endRefreshing()
         self.tableView.reloadData()
     }
+    */
+    
+    // we get a simple list of all coins
+    func getAllCoins(completion: @escaping (Result<[CoinData/*CoinListData*/], Error>) -> ()) {
+        
+        guard let url = URL(string: COIN_LIST_URL) else { return }
+        URLSession.shared.dataTask(with: url) { (data, response, error) in
+            
+            if let error = error {
+                completion(.failure(error))
+                return
+            }
+            
+            // success
+            guard let data = data else { return }
+            do {
+                guard let responseDic = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] else { return }
+                guard let dataArray = responseDic["data"] as? [[String: Any]] else { return }
+               
+                let coins = dataArray.map( { (dic: [String: Any]) -> CoinData /*CoinListData*/ in
+                    let coin = CoinData(dic: dic) //CoinListData(dic: dic)
+                    return coin
+                })
+                completion(.success(coins))
+              
+            } catch let jsonError {
+                completion(.failure(jsonError))
+            }
+            
+        }.resume()
+    }
+    
+    // we get current price data for all myCoins
+    func getPriceData() {
+        
+        // clear out myCoinsData first before re-adding to it
+        self.myCoinsData = [CoinData]()
+        
+        // to know when all data tasks have completed
+        let group = DispatchGroup()
+        
+        // we need to get the price data for each coin
+        for coinID in self.myCoins {
+            let coinURL = "\(TICKER_URL)\(coinID)/"
+            guard let url = URL(string: coinURL) else { return }
+            group.enter() // task enters dispatch group
+            getCoinDataFor(url: url, completion:  { result in
+            
+                group.leave() // task leaves dispatch group
+                switch result {
+                case .success(let coinData):
+                    self.myCoinsData.append(coinData)
+                    
+                case .failure(let error):
+                    let message = error.localizedDescription
+                    self.showAlertWith(title: "Error", message: message)
+                }
+            })
+        }
+        group.notify(queue: .main) {
+            // all tasks have left the group
+            self.updateCoinValues()
+        }
+    }
     
     
+    
+    func getCoinDataFor(url: URL, completion: @escaping (Result<CoinData, Error>) -> ()) {
+        
+        URLSession.shared.dataTask(with: url) { (data, response, error) in
+        
+            if let error = error {
+                completion(.failure(error))
+                return
+            }
+            
+            // success
+            guard let data = data else { return }
+            do {
+                guard let responseDic = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] else { return }
+                guard let coinDic = responseDic["data"] as? [String: Any] else { return }
+                
+                print(coinDic)
+                let coinData = CoinData.init(dic: coinDic)
+                
+                // init CoinData from the coinDic
+                /*
+                let name = coinDic["name"] as! String
+                let idInt = coinDic["id"] as! Int
+                let id = "\(idInt)"
+                var priceUSD = ""
+                var percentChange24H = ""
+                var amount = ""
+                var value = ""
+                let symbol = coinDic["symbol"] as! String
+                
+                let quotes = coinDic["quotes"] as! Dictionary<String, AnyObject>
+                let USD = quotes["USD"] as! Dictionary<String, AnyObject>
+                
+                let price = USD["price"] as! Double
+                priceUSD = "\(price)"
+                
+                var change = 0.0
+                if let changeDouble = USD["percent_change_24h"] as? Double {
+                    change = changeDouble
+                }
+                percentChange24H = "\(change)"
+                
+                // get the amount from myCoinsTotals
+                for coin in self.myCoinsTotals {
+                    
+                    // find coin we want by the id
+                    let coinID = coin["id"]
+                    
+                    if (id == coinID) {
+                        
+                        amount = coin["amount"] as String? ?? "0.0"
+                    }
+                }
+                
+                // calculate the value by amount * priceUSD
+                // if one is missing, the value will be zero
+                let amountDouble = Double(amount)!
+                let priceDouble = Double(priceUSD)!
+                let valueDouble = amountDouble * priceDouble
+                
+                // put it back in the form of a string
+                value = "\(valueDouble)"
+                
+                let coinData = CoinData(name: name, symbol: symbol, id: id, priceUSD: priceUSD, percentChange24H: percentChange24H, amount: amount, value: value, valueDouble: valueDouble, rank: 0)
+ */
+                
+                completion(.success(coinData))
+                
+            } catch let jsonError {
+                completion(.failure(jsonError))
+            }
+            
+        }.resume()
+    }
+    
+    
+    func updateCoinValues() {
+        
+        // display the total value and total percent change
+        // use yesterday's total value to calculate the total percent change
+        totalValue = 0.0
+        totalValueYesterday = 0.0
+        
+        for coinData in myCoinsData {
+            
+            let idNumber = coinData.idNumber
+            
+            // first add the amount and value to myCoinsData
+            for coinTotalDic in myCoinsTotals {
+                if coinTotalDic["id"] == "\(idNumber)" {
+                    if let amount = coinTotalDic["amount"] {
+                        coinData.amount = amount
+                        if let amountDouble = Double(amount) {
+                            coinData.value = amountDouble * coinData.priceUSD
+                        }
+                    }
+                }
+            }
+            
+            // add value to the totalValue
+            totalValue += coinData.value
+            
+            // get yesterdayValue
+            let yesterdayValue = coinData.value / ( 1 + (coinData.percentChange24H/100))
+            
+            // add to total yesterday value
+            totalValueYesterday += yesterdayValue
+        }
+        
+        // calculate total percent change
+        let totalPercentChange = ((totalValue/totalValueYesterday) - 1) * 100
+        
+        // update the total value label
+        if let valueString = totalValue.dollarString() {
+            self.totalValueLbl.text = valueString
+        }
+        
+        // set color and text of %change label
+        var percentString = ""
+        if (totalPercentChange < 0.0) {
+            self.totalChangeLbl.textColor = brightRed
+            percentString = String(format: "%.2f", totalPercentChange)
+            self.totalChangeLbl.text = "\(percentString)%"
+        } else if (totalPercentChange >= 0.0){
+            self.totalChangeLbl.textColor = brightGreen
+            percentString = String(format: "%.2f", totalPercentChange)
+            self.totalChangeLbl.text = "+\(percentString)%"
+        } else {
+            // if something went wrong
+            self.totalChangeLbl.textColor = brightGreen
+            self.totalChangeLbl.text = "%"
+        }
+            
+        // Sort myCoinsData by highest value
+        myCoinsData.sort { $0.value > $1.value }
+            
+        self.refreshControl.endRefreshing()
+        self.tableView.reloadData()
+    }
+    
+    
+    /*
     func getAllCoins(completed: @escaping DownloadComplete) {
         
         // clear allCoinsList before adding to it
@@ -307,13 +535,43 @@ class HomeVC: BaseVC, UITableViewDataSource, UITableViewDelegate {
             }
             completed()
         }
-    }
+    }*/
    
     
-    func getTop100(completed: @escaping DownloadComplete) {
+    func getTop100(completion: @escaping (Result<[CoinData], Error>) -> ()) {
+  
+        guard let url = URL(string: TICKER_URL) else { return }
+        URLSession.shared.dataTask(with: url) { (data, response, error) in
+            
+            if let error = error {
+                completion(.failure(error))
+                return
+            }
+            
+            // success
+            guard let data = data else { return }
+            do {
+                guard let responseDic = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] else { return }
+                
+                guard let dataDic = responseDic["data"] as? [String: [String: Any]] else { return }
+                
+                var coins = [CoinData]()
+                for coinDic in dataDic.values{
+                    let coin = CoinData(dic: coinDic)
+                    coins.append(coin)
+                }
+                completion(.success(coins))
+                
+            } catch let jsonError {
+                completion(.failure(jsonError))
+            }
+            
+        }.resume()
+    }
         
-        // clear top100Data before adding to it
-        self.top100Data = [CoinData]()
+        
+        /*
+        
         
         Alamofire.request(TICKER_URL).responseJSON { response in
             
@@ -367,13 +625,13 @@ class HomeVC: BaseVC, UITableViewDataSource, UITableViewDelegate {
             completed()
         }
     }
+ */
     
 
     @objc private func refreshCoinData(sender: Any) {
    
         // update the coin data
         updateCoinData()
-     
     }
     
     
@@ -381,7 +639,6 @@ class HomeVC: BaseVC, UITableViewDataSource, UITableViewDelegate {
     // MARK: UITableView
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
         return myCoinsData.count
     }
     
@@ -392,92 +649,17 @@ class HomeVC: BaseVC, UITableViewDataSource, UITableViewDelegate {
         let cell = tableView.dequeueReusableCell(withIdentifier: "CoinCell", for: indexPath) as! CoinCell
         
         let coinData = myCoinsData[indexPath.row]
-        
-        let name = coinData.name
-        let symbol = coinData.symbol
-        
-        // Value
-        // get NSNumber from the string
-        let valueDouble = Double(coinData.value)
-        let valueNumber = NSNumber(value: valueDouble!)
-        
-        // format to display as "$1,000.00"
-        let dollarFormatter = NumberFormatter()
-        dollarFormatter.usesGroupingSeparator = true
-        dollarFormatter.numberStyle = .currency
-        dollarFormatter.locale = Locale(identifier: "en_US")
-        let valueString = dollarFormatter.string(from: valueNumber)
-        let value = valueString
-        
-        
-        // Amount
-        // get NSNumber from the string
-        let amountDouble = Double(coinData.amount)
-        let amountNumber = NSNumber(value: amountDouble!)
-        
-        // format to display as 0.145
-        let amountFormatter = NumberFormatter()
-        amountFormatter.usesGroupingSeparator = true
-        amountFormatter.numberStyle = .decimal
-        
-        let amountString = amountFormatter.string(from: amountNumber)
-        let amount = amountString
-        
-        
-        // Price
-        // get NSNumber from the string
-        let priceDouble = Double(coinData.priceUSD)
-        let priceNumber = NSNumber(value: priceDouble!)
-        
-        // use amountFormatter
-        let priceString = amountFormatter.string(from: priceNumber)
-        let price = "$\(priceString!)"
-        
-        // set color of %change label
-        var change = ""
-        let changeDouble = Double(coinData.percentChange24H)
-        if (changeDouble! < 0.0) {
-            cell.changeLbl.textColor = darkRed
-            change = "\(coinData.percentChange24H)%"
-        } else {
-            cell.changeLbl.textColor = darkGreen
-            change = "+\(coinData.percentChange24H)%"
-        }
-        
-        cell.nameLbl.text = name
-        cell.valueLbl.text = value
-        cell.amountLbl.text = "\(amount!) \(symbol)"
-        cell.priceLbl.text = price
-        cell.changeLbl.text = change
-        
-        // The image to dowload
-        let imgURL = URL(string:"\(MEDIUM_IMG_BASE_URL)\(coinData.id).png")!
-        
-        // Use Alamofire to download the image
-        Alamofire.request(imgURL).responseData { (response) in
-            
-            if response.error == nil {
-                print(response.result)
-                
-                // Show the downloaded image:
-                if let data = response.data {
-                    cell.coinLogo.image = UIImage(data: data)
-                }
-            }
-        }
-        
+        cell.coinData = coinData
         return cell
     }
     
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        let coinData: CoinData
-        coinData = self.myCoinsData[indexPath.row]
+        let coinData = self.myCoinsData[indexPath.row]
         self.selectedCoin = coinData
         
         performSegue(withIdentifier: "goToCoinDetailVC", sender: self)
-        
     }
     
     
@@ -485,7 +667,6 @@ class HomeVC: BaseVC, UITableViewDataSource, UITableViewDelegate {
     @IBAction func addCoin(_ sender: Any) {
         
         performSegue(withIdentifier: "goToAddCoinVC", sender: self)
-        
     }
     
     
@@ -497,20 +678,25 @@ class HomeVC: BaseVC, UITableViewDataSource, UITableViewDelegate {
     
     @IBAction func top100BtnPressed(_ sender: Any) {
         
-        // get the coin data if we have an internet connection
-        if (self.reachable()){
-            
-            getTop100 {
+        getTop100(completion: { result in
+        
+            switch result {
+            case .success(let coins):
+                
+                self.top100Data = coins
+                self.top100Data.sort { $0.rank < $1.rank }
+                
                 // navigate to top100 page
-                self.performSegue(withIdentifier: "goToTop100VC", sender: self)
+                // back to main thread
+                DispatchQueue.main.async {
+                    self.performSegue(withIdentifier: "goToTop100VC", sender: self)
+                }
+
+            case .failure(let error):
+                let message = error.localizedDescription
+                self.showAlertWith(title: "Error", message: message)
             }
-            
-        } else {
-            // not online
-            // show alert
-            showAlertWith(title: "No Connection", message: "Please connect your device to WiFi to use When Moon??? app")
-        }
-       
+        })
     }
     
     
@@ -518,7 +704,6 @@ class HomeVC: BaseVC, UITableViewDataSource, UITableViewDelegate {
     @IBAction func unwindFromCoinDetailVC(_ sender: UIStoryboardSegue) {
         
         if sender.source is CoinDetailVC {
-            
             // reload the data because the myCoins and myCoinsTotals may have changed
             updateCoinData()
         }

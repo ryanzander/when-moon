@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import Alamofire
+//import Alamofire
 
 class Top100VC: BaseVC, UITableViewDataSource, UITableViewDelegate {
     
@@ -17,8 +17,6 @@ class Top100VC: BaseVC, UITableViewDataSource, UITableViewDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-
         
         //  remove annoying space in tableview seperators
         tableView.separatorInset = .zero
@@ -54,7 +52,8 @@ class Top100VC: BaseVC, UITableViewDataSource, UITableViewDelegate {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Top100Cell", for: indexPath) as! Top100Cell
         
         let coinData = self.top100Data[indexPath.row]
-        
+        cell.coinData = coinData
+        /*
         let rank = indexPath.row + 1
         let coinRank = "\(rank)"
         let coinSymbol = coinData.symbol
@@ -106,7 +105,7 @@ class Top100VC: BaseVC, UITableViewDataSource, UITableViewDelegate {
                 }
             }
         }
-        
+        */
         return cell
     }
     
@@ -117,7 +116,29 @@ class Top100VC: BaseVC, UITableViewDataSource, UITableViewDelegate {
     
     
     @objc private func refreshCoinData(sender: Any) {
-   
+        
+        getTop100(completion: { result in
+            
+            switch result {
+            case .success(let coins):
+                
+                self.top100Data = coins
+                self.top100Data.sort { $0.rank < $1.rank }
+                
+                // back to main thread
+                DispatchQueue.main.async {
+                    self.refreshControl.endRefreshing()
+                    self.tableView.reloadData()
+                }
+                
+            case .failure(let error):
+                let message = error.localizedDescription
+                self.showAlertWith(title: "Error", message: message)
+            }
+        })
+    }
+        
+   /*
         // get the coin data if we have an internet connection
         if (self.reachable()){
     
@@ -140,9 +161,39 @@ class Top100VC: BaseVC, UITableViewDataSource, UITableViewDelegate {
             
         }
     }
+ */
     
-    
-    
+    func getTop100(completion: @escaping (Result<[CoinData], Error>) -> ()) {
+        
+        guard let url = URL(string: TICKER_URL) else { return }
+        URLSession.shared.dataTask(with: url) { (data, response, error) in
+            
+            if let error = error {
+                completion(.failure(error))
+                return
+            }
+            
+            // success
+            guard let data = data else { return }
+            do {
+                guard let responseDic = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] else { return }
+                
+                guard let dataDic = responseDic["data"] as? [String: [String: Any]] else { return }
+                
+                var coins = [CoinData]()
+                for coinDic in dataDic.values{
+                    let coin = CoinData(dic: coinDic)
+                    coins.append(coin)
+                }
+                completion(.success(coins))
+                
+            } catch let jsonError {
+                completion(.failure(jsonError))
+            }
+            
+            }.resume()
+    }
+    /*
     func getTop100(completed: @escaping DownloadComplete) {
         
         Alamofire.request(TICKER_URL).responseJSON { response in
@@ -181,9 +232,9 @@ class Top100VC: BaseVC, UITableViewDataSource, UITableViewDelegate {
                         let change = USD["percent_change_24h"] as! Double
                         percentChange24H = "\(change)"
                         
-                        let coinData = CoinData(name: name, symbol: symbol, id: id, priceUSD: priceUSD, percentChange24H: percentChange24H, amount: amount, value: value, valueDouble: 0.0, rank: rank)
+              //          let coinData = CoinData(name: name, symbol: symbol, id: id, priceUSD: priceUSD, percentChange24H: percentChange24H, amount: amount, value: value, valueDouble: 0.0, rank: rank)
                         
-                        self.top100Data.append(coinData)
+              //          self.top100Data.append(coinData)
                     }
                     
                     // Sort top100Data by rank
@@ -197,7 +248,7 @@ class Top100VC: BaseVC, UITableViewDataSource, UITableViewDelegate {
             completed()
         }
     }
-    
+    */
 
     /*
     // MARK: - Navigation

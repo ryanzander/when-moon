@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import Reachability
+//import Reachability
 
 class BaseVC: UIViewController, UITextFieldDelegate {
     
@@ -16,7 +16,7 @@ class BaseVC: UIViewController, UITextFieldDelegate {
     //var textFieldRect: CGRect?
     //var isKeyboardOpening = false
     
-    let reachability = Reachability()!
+    //let reachability = Reachability()!
     let refreshControl = UIRefreshControl()
 
     override func viewDidLoad() {
@@ -86,14 +86,14 @@ class BaseVC: UIViewController, UITextFieldDelegate {
     }
     
     
-    
+    /*
     // Dismiss keyboad with Done or Return button
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         
        // isKeyboardOpening = false
-        textField.resignFirstResponder()
+//        textField.resignFirstResponder()
         return true;
-    }
+    }*/
     
     /*
     
@@ -129,7 +129,7 @@ class BaseVC: UIViewController, UITextFieldDelegate {
         self.present(alert, animated: true, completion: nil)
     }
     
-    
+    /*
     // Reachable
     func reachable() -> Bool {
         
@@ -142,5 +142,5 @@ class BaseVC: UIViewController, UITextFieldDelegate {
             return false
         }
     }
-    
+    */
 }
