@@ -122,8 +122,7 @@ class HomeVC: BaseVC, UITableViewDataSource, UITableViewDelegate {
     // we get current price data for all myCoins
     func getPriceData() {
         
-        // clear out myCoinsData first before re-adding to it
-        self.myCoinsData = [CoinData]()
+        var newCoinsData = [CoinData]()
         
         // to know when all data tasks have completed
         let group = DispatchGroup()
@@ -139,7 +138,7 @@ class HomeVC: BaseVC, UITableViewDataSource, UITableViewDelegate {
                 group.leave() // task leaves dispatch group
                 switch result {
                 case .success(let coinData):
-                    self.myCoinsData.append(coinData)
+                    newCoinsData.append(coinData)
                     
                 case .failure(let error):
                     let message = error.localizedDescription
@@ -149,6 +148,7 @@ class HomeVC: BaseVC, UITableViewDataSource, UITableViewDelegate {
         }
         group.notify(queue: .main) {
             // all tasks have left the group
+            self.myCoinsData = newCoinsData
             self.updateCoinValues()
         }
     }
@@ -239,9 +239,10 @@ class HomeVC: BaseVC, UITableViewDataSource, UITableViewDelegate {
             
         // Sort myCoinsData by highest value
         myCoinsData.sort { $0.value > $1.value }
-            
+        
         self.refreshControl.endRefreshing()
         self.tableView.reloadData()
+        
     }
    
     
@@ -364,7 +365,7 @@ class HomeVC: BaseVC, UITableViewDataSource, UITableViewDelegate {
         // This will show in the next view controller being pushed
         let backItem = UIBarButtonItem()
         backItem.title = ""
-        navigationItem.backBarButtonItem = backItem 
+        navigationItem.backBarButtonItem = backItem
         
         if segue.identifier == "goToAddCoinVC" {
             
