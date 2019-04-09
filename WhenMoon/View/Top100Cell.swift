@@ -57,7 +57,7 @@ class Top100Cell: UITableViewCell {
                 }
                 self.changeLbl.text = changeString
                 
-                // The image to dowload
+                // The image to download
                 if let url = URL(string:"\(MEDIUM_IMG_BASE_URL)\(coinData.idNumber).png") {
                     
                     URLSession.shared.dataTask(with: url) { (data, response, error) in

@@ -7,7 +7,6 @@
 //
 
 import UIKit
-//import Alamofire
 
 class CoinDetailVC: BaseVC {
     
@@ -61,9 +60,6 @@ class CoinDetailVC: BaseVC {
             }
         
             // Price
-            
-            
-            
             if coinData.priceUSD > 1000.0 {
                 if let dollarString = coinData.priceUSD.dollarString() {
                     self.priceLbl.text = dollarString
@@ -71,7 +67,7 @@ class CoinDetailVC: BaseVC {
             } else if coinData.priceUSD > 10.0 {
             
                 if let price = coinData.priceUSD.decimalString(maxFractionDigits: 4) {
-                self.priceLbl.text = "$\(price)"
+                    self.priceLbl.text = "$\(price)"
                 }
                 
             } else {
@@ -79,7 +75,6 @@ class CoinDetailVC: BaseVC {
                     self.priceLbl.text = "$\(price)"
                 }
             }
-            //self.priceLbl.text = "$\(coinData.priceUSD)"
         
             // set text and color of %change label
             var changeString = ""
@@ -408,11 +403,9 @@ class CoinDetailVC: BaseVC {
             newTotals.append(coinDic)
             defaults.set(newTotals, forKey:"myCoinsTotals")
         }
-            
-       
+        
         // navigate back to home screen and refresh data
         performSegue(withIdentifier: "unwindFromCoinDetailVC", sender: self)
- 
     }
 
 }

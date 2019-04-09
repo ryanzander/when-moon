@@ -8,7 +8,6 @@
 
 import UIKit
 
-
 class CoinCell: UITableViewCell {
     
     @IBOutlet private weak var coinLogo: UIImageView!

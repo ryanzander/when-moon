@@ -32,7 +32,7 @@ extension Double {
         // get NSNumber from the double
         let nsNum = NSNumber(value: self)
         
-        // format to display as 0.145
+        // format to display as 0.00145, with a max number of decimal places
         let amountFormatter = NumberFormatter()
         amountFormatter.maximumFractionDigits = maxFractionDigits
         amountFormatter.usesGroupingSeparator = true
@@ -43,6 +43,7 @@ extension Double {
         return amountString
     }
     
+    // to display dollar prices containing fractions of a penny
     func priceString() -> String? {
         
         // get NSNumber from the double

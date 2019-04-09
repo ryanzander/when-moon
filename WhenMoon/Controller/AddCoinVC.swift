@@ -7,7 +7,6 @@
 //
 
 import UIKit
-//import Alamofire
 
 class AddCoinVC: BaseVC, UITableViewDataSource, UITableViewDelegate, UISearchControllerDelegate {
     
