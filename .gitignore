@@ -10,7 +10,7 @@
 ## User settings
 xcuserdata/
 
-WhenMoon/Resources/PrivateConstants.swift
+WhenMoon/Resources/ApiKeys.swift
 
 
 ## compatibility with Xcode 8 and earlier (ignoring not required starting Xcode 9)
