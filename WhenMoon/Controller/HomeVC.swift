@@ -14,7 +14,7 @@ class HomeVC: BaseVC, UITableViewDataSource, UITableViewDelegate {
     @IBOutlet weak var totalValueLbl: UILabel!
     @IBOutlet weak var totalChangeLbl: UILabel!
     
-    var myCoins = [String]() // with v2, this needs to be array of coin IDs
+    var myCoins = [String]() // array of coin IDs
     var myCoinsTotals = [Dictionary<String, String>]()
     var myCoinsData = [CoinData]()
     var allCoinsData = [CoinData]()
@@ -118,10 +118,6 @@ class HomeVC: BaseVC, UITableViewDataSource, UITableViewDelegate {
                 guard let responseDic = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] else { return }
                 guard let dataArray = responseDic["data"] as? [[String: Any]] else { return }
                 
-                print("Dic: -------------------")
-                print(responseDic)
-                print("DataArray count: \(dataArray.count)")
-               
                 let coins = dataArray.map( { (dic: [String: Any]) -> CoinData in
                     let coin = CoinData(dic: dic)
                     return coin
@@ -144,65 +140,8 @@ class HomeVC: BaseVC, UITableViewDataSource, UITableViewDelegate {
         DispatchQueue.main.async {
             self.updateCoinValues()
         }
-       
-        /*
-        // to know when all data tasks have completed
-        let group = DispatchGroup()
-        
-        // we need to get the price data for each coin
-        for coinID in self.myCoins {
-            
-            let coinURL = "\(TICKER_URL)\(coinID)/"
-            guard let url = URL(string: coinURL) else { return }
-            group.enter() // task enters dispatch group
-            getCoinDataFor(url: url, completion:  { result in
-            
-                group.leave() // task leaves dispatch group
-                switch result {
-                case .success(let coinData):
-                    newCoinsData.append(coinData)
-                    
-                case .failure(let error):
-                    let message = error.localizedDescription
-                    self.showAlertWith(title: "Error", message: message)
-                }
-            })
-        }
-        group.notify(queue: .main) {
-            // all tasks have left the group
-            self.myCoinsData = newCoinsData
-            self.updateCoinValues()
-        }*/
     }
     
-    // not needed with new api
-    /*
-    // more detailed data for a coin
-    func getCoinDataFor(url: URL, completion: @escaping (Result<CoinData, Error>) -> ()) {
-        
-        URLSession.shared.dataTask(with: url) { (data, response, error) in
-        
-            if let error = error {
-                completion(.failure(error))
-                return
-            }
-            
-            // success
-            guard let data = data else { return }
-            do {
-                guard let responseDic = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] else { return }
-                guard let coinDic = responseDic["data"] as? [String: Any] else { return }
-                
-                let coinData = CoinData.init(dic: coinDic)
-                completion(.success(coinData))
-                
-            } catch let jsonError {
-                completion(.failure(jsonError))
-            }
-            
-        }.resume()
-    }
-    */
     
     func updateCoinValues() {
         
@@ -266,41 +205,8 @@ class HomeVC: BaseVC, UITableViewDataSource, UITableViewDelegate {
         
         self.refreshControl.endRefreshing()
         self.tableView.reloadData()
-        
     }
    
-    /*
-    func getTop100(completion: @escaping (Result<[CoinData], Error>) -> ()) {
-  
-        guard let url = URL(string: TICKER_URL) else { return }
-        URLSession.shared.dataTask(with: url) { (data, response, error) in
-            
-            if let error = error {
-                completion(.failure(error))
-                return
-            }
-            
-            // success
-            guard let data = data else { return }
-            do {
-                guard let responseDic = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] else { return }
-                
-                guard let dataDic = responseDic["data"] as? [String: [String: Any]] else { return }
-                
-                var coins = [CoinData]()
-                for coinDic in dataDic.values{
-                    let coin = CoinData(dic: coinDic)
-                    coins.append(coin)
-                }
-                completion(.success(coins))
-                
-            } catch let jsonError {
-                completion(.failure(jsonError))
-            }
-        }.resume()
-    }
-    */
-    
 
     @objc private func refreshCoinData(sender: Any) {
         // update the coin data
@@ -352,28 +258,6 @@ class HomeVC: BaseVC, UITableViewDataSource, UITableViewDelegate {
         self.top100Data = Array(arraySlice)
         
         self.performSegue(withIdentifier: "goToTop100VC", sender: self)
-        
-        /*
-        getTop100(completion: { result in
-        
-            switch result {
-            case .success(let coins):
-                
-                self.top100Data = coins
-                self.top100Data.sort { $0.rank < $1.rank }
-                
-                // navigate to top100 page
-                // back to main thread
-                DispatchQueue.main.async {
-                    self.performSegue(withIdentifier: "goToTop100VC", sender: self)
-                }
-
-            case .failure(let error):
-                let message = error.localizedDescription
-                self.showAlertWith(title: "Error", message: message)
-            }
-        })
-         */
     }
     
     

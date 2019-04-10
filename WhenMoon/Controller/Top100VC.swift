@@ -57,7 +57,6 @@ class Top100VC: BaseVC, UITableViewDataSource, UITableViewDelegate {
             case .success(let coins):
                 
                 self.top100Data = coins
-                self.top100Data.sort { $0.rank < $1.rank }
                 
                 // back to main thread
                 DispatchQueue.main.async {
@@ -72,11 +71,18 @@ class Top100VC: BaseVC, UITableViewDataSource, UITableViewDelegate {
         })
     }
     
-    
+   
     func getTop100(completion: @escaping (Result<[CoinData], Error>) -> ()) {
         
-        guard let url = URL(string: TICKER_URL) else { return }
-        URLSession.shared.dataTask(with: url) { (data, response, error) in
+        // with no parameters, LATEST_URL returns top 100 coins by default
+        guard let url = URL(string: LATEST_URL) else { return }
+        
+        // make request
+        var request = URLRequest(url: url)
+        request.setValue("application/json", forHTTPHeaderField: "Accepts")
+        request.setValue(API_KEY, forHTTPHeaderField: "X-CMC_PRO_API_KEY")
+        
+        URLSession.shared.dataTask(with: request) { (data, response, error) in
             
             if let error = error {
                 completion(.failure(error))
@@ -87,14 +93,12 @@ class Top100VC: BaseVC, UITableViewDataSource, UITableViewDelegate {
             guard let data = data else { return }
             do {
                 guard let responseDic = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] else { return }
+                guard let dataArray = responseDic["data"] as? [[String: Any]] else { return }
                 
-                guard let dataDic = responseDic["data"] as? [String: [String: Any]] else { return }
-                
-                var coins = [CoinData]()
-                for coinDic in dataDic.values{
-                    let coin = CoinData(dic: coinDic)
-                    coins.append(coin)
-                }
+                let coins = dataArray.map( { (dic: [String: Any]) -> CoinData in
+                    let coin = CoinData(dic: dic)
+                    return coin
+                })
                 completion(.success(coins))
                 
             } catch let jsonError {
@@ -102,5 +106,6 @@ class Top100VC: BaseVC, UITableViewDataSource, UITableViewDelegate {
             }
         }.resume()
     }
+   
 
 }

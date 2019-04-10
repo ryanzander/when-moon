@@ -25,7 +25,7 @@ class CryptoLoveVC: BaseVC {
         ltcLbl.text = LTC_ADDRESS
         ethLbl.text = ETH_ADDRESS
         
-        messageLbl.text = "When Moon??? app is given away free and with no ads.\n\nIf you've enjoyed using it, how about showing a little crypto ♥︎ for the developer?"
+        messageLbl.text = "When Moon??? is a free app with no ads.\n\nIf you've enjoyed using it, how about showing a little crypto ♥︎ for the developer?"
         
     }
 

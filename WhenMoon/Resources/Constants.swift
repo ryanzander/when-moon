@@ -15,35 +15,18 @@ let ETH_ADDRESS = "0x25d91257E198596B4aD9a8691F94c97e1aec0D37"
 
 // example image url
 // https://s2.coinmarketcap.com/static/img/coins/32x32/2099.png
-
 let SMALL_IMG_BASE_URL = "https://s2.coinmarketcap.com/static/img/coins/32x32/"
 let MEDIUM_IMG_BASE_URL = "https://s2.coinmarketcap.com/static/img/coins/64x64/"
 let LARGE_IMG_BASE_URL = "https://s2.coinmarketcap.com/static/img/coins/128x128/"
 
-
-// TODO: Migrate to the new coinmarketcap api https://pro.coinmarketcap.com/migrate/
-// sign in at https://pro.coinmarketcap.com/account
-
 let API_KEY = PRIVATE_API_KEY
-//
 // PRIVATE_API_KEY is not included in the remote git repository
-//
 // Sign up at
 // https://pro-api.coinmarketcap.com
 // and replace PRIVATE_API_KEY with your API Key to run the app
 
-
-// latest is top 100 by default
-let LATEST_URL = "https://pro-api.coinmarketcap.com/v1/cryptocurrency/listings/latest?start=0&limit=5000"
-let TOP_100_URL = "https://pro-api.coinmarketcap.com/v1/cryptocurrency/listings/latest"
-
-
-let COIN_LIST_URL = "https://api.coinmarketcap.com/v2/listings/" // old api
-let TICKER_URL = "https://api.coinmarketcap.com/v2/ticker/" // old api
-// by default, TICKER_URL gets info on top 100 coins
-// append id to TICKER_URL for individual coin data, ex:
-// https://api.coinmarketcap.com/v2/ticker/1/
-
+// latest returns top 100 coins by default
+let LATEST_URL = "https://pro-api.coinmarketcap.com/v1/cryptocurrency/listings/latest"
 let appStoreURL = "itms-apps://itunes.apple.com/app/id1386653157?action=write-review"
 
 // colors

@@ -105,60 +105,7 @@ class AddCoinVC: BaseVC, UITableViewDataSource, UITableViewDelegate, UISearchCon
         
         self.performSegue(withIdentifier: "goToCoinDetailVC", sender: self)
         
-        // with v2 api, we need to look up the full data for the selected coin
-        //self.getCoinData()
     }
-    
-    /*
-    func getCoinData() {
-        
-        let coinID = selectedCoin.idNumber
-        let coinURL = "\(TICKER_URL)\(coinID)/"
-        guard let url = URL(string: coinURL) else { return }
-        
-        getCoinDataFor(url: url, completion:  { result in
-            
-            switch result {
-            case .success(let coinData):
-                // reset selectedCoin with the full data
-                self.selectedCoin = coinData
-                
-                // back to main thread
-                DispatchQueue.main.async {
-                    self.performSegue(withIdentifier: "goToCoinDetailVC", sender: self)
-                }
-                
-            case .failure(let error):
-                let message = error.localizedDescription
-                self.showAlertWith(title: "Error", message: message)
-            }
-        })
-    }*/
-    
-    /*
-    func getCoinDataFor(url: URL, completion: @escaping (Result<CoinData, Error>) -> ()) {
-        
-        URLSession.shared.dataTask(with: url) { (data, response, error) in
-            
-            if let error = error {
-                completion(.failure(error))
-                return
-            }
-            
-            // success
-            guard let data = data else { return }
-            do {
-                guard let responseDic = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] else { return }
-                guard let coinDic = responseDic["data"] as? [String: Any] else { return }
-                
-                let coinData = CoinData.init(dic: coinDic)
-                completion(.success(coinData))
-                
-            } catch let jsonError {
-                completion(.failure(jsonError))
-            }
-        }.resume()
-    }*/
     
     
     // MARK: - Search Bar
@@ -203,10 +150,9 @@ class AddCoinVC: BaseVC, UITableViewDataSource, UITableViewDelegate, UISearchCon
         }
     }
  }
-
-    
-    
+  
 }
+
 
 extension AddCoinVC: UISearchResultsUpdating {
     
