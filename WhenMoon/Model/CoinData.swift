@@ -27,14 +27,14 @@ class CoinData: NSObject {
         
         var price = 0.0
         var change = 0.0
-        if let quotes = dic["quotes"] as? [String: Any] {
-            if let usd = quotes["USD"] as? [String: Any] {
+        if let quote = dic["quote"] as? [String: Any] {
+            if let usd = quote["USD"] as? [String: Any] {
                 price = usd["price"] as? Double ?? 0.0
                 change = usd["percent_change_24h"] as? Double ?? 0.0
             }
         }
         
-        let rank = dic["rank"] as? Int ?? 0
+        let rank = dic["cmc_rank"] as? Int ?? 0
         
         self.name = name
         self.symbol = symbol

@@ -79,12 +79,13 @@ class CoinDetailVC: BaseVC {
             // set text and color of %change label
             var changeString = ""
             let change = coinData.percentChange24H
+            let percentString = String(format: "%.2f", coinData.percentChange24H)
             if (change < 0.0) {
                 self.changeLbl.textColor = darkRed
-                changeString = "\(coinData.percentChange24H)%"
+                changeString = "\(percentString)%"
             } else {
                 self.changeLbl.textColor = darkGreen
-                changeString = "+\(coinData.percentChange24H)%"
+                changeString = "+\(percentString)%"
             }
             self.changeLbl.text = changeString
         

@@ -22,6 +22,28 @@ let LARGE_IMG_BASE_URL = "https://s2.coinmarketcap.com/static/img/coins/128x128/
 
 
 // TODO: Migrate to the new coinmarketcap api https://pro.coinmarketcap.com/migrate/
+// sign in at https://pro.coinmarketcap.com/account
+
+let API_KEY = PRIVATE_API_KEY
+//
+// PRIVATE_API_KEY is not included in the remote git repository
+//
+// Sign up at
+// https://pro-api.coinmarketcap.com
+// and replace PRIVATE_API_KEY with your API Key to run the app
+
+
+/*
+var request = URLRequest(url: url)
+request.setValue("application/json", forHTTPHeaderField: "Accepts")
+request.setValue(API_KEY, forHTTPHeaderField: "X-CMC_PRO_API_KEY")
+let task = URLSession.shared.dataTask(with: request) {
+*/
+
+// latest is top 100 by default
+let LATEST_URL = "https://pro-api.coinmarketcap.com/v1/cryptocurrency/listings/latest?start=0&limit=5000"
+let TOP_100_URL = "https://pro-api.coinmarketcap.com/v1/cryptocurrency/listings/latest"
+
 
 let COIN_LIST_URL = "https://api.coinmarketcap.com/v2/listings/"
 let TICKER_URL = "https://api.coinmarketcap.com/v2/ticker/"

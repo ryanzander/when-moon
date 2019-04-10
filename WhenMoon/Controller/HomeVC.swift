@@ -17,7 +17,7 @@ class HomeVC: BaseVC, UITableViewDataSource, UITableViewDelegate {
     var myCoins = [String]() // with v2, this needs to be array of coin IDs
     var myCoinsTotals = [Dictionary<String, String>]()
     var myCoinsData = [CoinData]()
-    var allCoinsList = [CoinData]()
+    var allCoinsData = [CoinData]()
     var top100Data = [CoinData]()
     var selectedCoin: CoinData!
     var totalValue = 0.0
@@ -76,7 +76,7 @@ class HomeVC: BaseVC, UITableViewDataSource, UITableViewDelegate {
             case .success(let coins):
               
                 // we have the list of all coins
-                self.allCoinsList = coins
+                self.allCoinsData = coins
                 
                 // now we need the price data for each coin in myCoins
                 self.getPriceData()
@@ -92,9 +92,21 @@ class HomeVC: BaseVC, UITableViewDataSource, UITableViewDelegate {
     // we get a list of all coins
     func getAllCoins(completion: @escaping (Result<[CoinData], Error>) -> ()) {
         
-        guard let url = URL(string: COIN_LIST_URL) else { return }
-        URLSession.shared.dataTask(with: url) { (data, response, error) in
-            
+        // components with parameters
+        var components = URLComponents(string: LATEST_URL)!
+        components.queryItems = [
+            URLQueryItem(name: "start", value: "1"),
+            URLQueryItem(name: "limit", value: "5000")
+        ]
+        guard let url = components.url else { return }
+        
+        // make request
+        var request = URLRequest(url: url)
+        request.setValue("application/json", forHTTPHeaderField: "Accepts")
+        request.setValue(API_KEY, forHTTPHeaderField: "X-CMC_PRO_API_KEY")
+        
+        URLSession.shared.dataTask(with: request) { (data, response, error) in
+       
             if let error = error {
                 completion(.failure(error))
                 return
@@ -105,6 +117,10 @@ class HomeVC: BaseVC, UITableViewDataSource, UITableViewDelegate {
             do {
                 guard let responseDic = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] else { return }
                 guard let dataArray = responseDic["data"] as? [[String: Any]] else { return }
+                
+                print("Dic: -------------------")
+                print(responseDic)
+                print("DataArray count: \(dataArray.count)")
                
                 let coins = dataArray.map( { (dic: [String: Any]) -> CoinData in
                     let coin = CoinData(dic: dic)
@@ -122,8 +138,14 @@ class HomeVC: BaseVC, UITableViewDataSource, UITableViewDelegate {
     // we get current price data for all myCoins
     func getPriceData() {
         
-        var newCoinsData = [CoinData]()
+        myCoinsData = allCoinsData.filter { myCoins.contains("\($0.idNumber)") }
         
+        // update on main thread
+        DispatchQueue.main.async {
+            self.updateCoinValues()
+        }
+       
+        /*
         // to know when all data tasks have completed
         let group = DispatchGroup()
         
@@ -150,9 +172,11 @@ class HomeVC: BaseVC, UITableViewDataSource, UITableViewDelegate {
             // all tasks have left the group
             self.myCoinsData = newCoinsData
             self.updateCoinValues()
-        }
+        }*/
     }
     
+    // not needed with new api
+    /*
     // more detailed data for a coin
     func getCoinDataFor(url: URL, completion: @escaping (Result<CoinData, Error>) -> ()) {
         
@@ -178,7 +202,7 @@ class HomeVC: BaseVC, UITableViewDataSource, UITableViewDelegate {
             
         }.resume()
     }
-    
+    */
     
     func updateCoinValues() {
         
@@ -218,7 +242,7 @@ class HomeVC: BaseVC, UITableViewDataSource, UITableViewDelegate {
         
         // update the total value label
         if let valueString = totalValue.dollarString() {
-            self.totalValueLbl.text = valueString
+                self.totalValueLbl.text = valueString
         }
         
         // set color and text of %change label
@@ -245,7 +269,7 @@ class HomeVC: BaseVC, UITableViewDataSource, UITableViewDelegate {
         
     }
    
-    
+    /*
     func getTop100(completion: @escaping (Result<[CoinData], Error>) -> ()) {
   
         guard let url = URL(string: TICKER_URL) else { return }
@@ -275,7 +299,7 @@ class HomeVC: BaseVC, UITableViewDataSource, UITableViewDelegate {
             }
         }.resume()
     }
-    
+    */
     
 
     @objc private func refreshCoinData(sender: Any) {
@@ -324,6 +348,12 @@ class HomeVC: BaseVC, UITableViewDataSource, UITableViewDelegate {
     
     @IBAction func top100BtnPressed(_ sender: Any) {
         
+        let arraySlice = allCoinsData.prefix(100)
+        self.top100Data = Array(arraySlice)
+        
+        self.performSegue(withIdentifier: "goToTop100VC", sender: self)
+        
+        /*
         getTop100(completion: { result in
         
             switch result {
@@ -343,6 +373,7 @@ class HomeVC: BaseVC, UITableViewDataSource, UITableViewDelegate {
                 self.showAlertWith(title: "Error", message: message)
             }
         })
+         */
     }
     
     
@@ -370,7 +401,7 @@ class HomeVC: BaseVC, UITableViewDataSource, UITableViewDelegate {
         if segue.identifier == "goToAddCoinVC" {
             
             if let vc = segue.destination as? AddCoinVC {
-               vc.allCoinsList = self.allCoinsList
+               vc.allCoinsData = self.allCoinsData
             }
         }
         

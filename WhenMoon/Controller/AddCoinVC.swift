@@ -12,7 +12,7 @@ class AddCoinVC: BaseVC, UITableViewDataSource, UITableViewDelegate, UISearchCon
     
     @IBOutlet weak var tableView: UITableView!
     
-    var allCoinsList = [CoinData]()
+    var allCoinsData = [CoinData]()
     var filteredCoins = [CoinData]()
     var selectedCoin: CoinData!
     var myCoins = [String]()
@@ -53,7 +53,7 @@ class AddCoinVC: BaseVC, UITableViewDataSource, UITableViewDelegate, UISearchCon
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         if (searchBarIsEmpty()) {
-            return self.allCoinsList.count
+            return self.allCoinsData.count
         } else {
             return self.filteredCoins.count
         }
@@ -67,7 +67,7 @@ class AddCoinVC: BaseVC, UITableViewDataSource, UITableViewDelegate, UISearchCon
         
         let coinData: CoinData
         if (searchBarIsEmpty()) {
-            coinData = self.allCoinsList[indexPath.row]
+            coinData = self.allCoinsData[indexPath.row]
         } else {
             coinData = self.filteredCoins[indexPath.row]
         }
@@ -86,7 +86,7 @@ class AddCoinVC: BaseVC, UITableViewDataSource, UITableViewDelegate, UISearchCon
         
         let coinData: CoinData
         if (searchBarIsEmpty()) {
-            coinData = self.allCoinsList[indexPath.row]
+            coinData = self.allCoinsData[indexPath.row]
         } else {
             coinData = self.filteredCoins[indexPath.row]
         }
@@ -103,11 +103,13 @@ class AddCoinVC: BaseVC, UITableViewDataSource, UITableViewDelegate, UISearchCon
             }
         }
         
+        self.performSegue(withIdentifier: "goToCoinDetailVC", sender: self)
+        
         // with v2 api, we need to look up the full data for the selected coin
-        self.getCoinData()
+        //self.getCoinData()
     }
     
-    
+    /*
     func getCoinData() {
         
         let coinID = selectedCoin.idNumber
@@ -131,9 +133,9 @@ class AddCoinVC: BaseVC, UITableViewDataSource, UITableViewDelegate, UISearchCon
                 self.showAlertWith(title: "Error", message: message)
             }
         })
-    }
+    }*/
     
-    
+    /*
     func getCoinDataFor(url: URL, completion: @escaping (Result<CoinData, Error>) -> ()) {
         
         URLSession.shared.dataTask(with: url) { (data, response, error) in
@@ -156,7 +158,7 @@ class AddCoinVC: BaseVC, UITableViewDataSource, UITableViewDelegate, UISearchCon
                 completion(.failure(jsonError))
             }
         }.resume()
-    }
+    }*/
     
     
     // MARK: - Search Bar
@@ -168,7 +170,7 @@ class AddCoinVC: BaseVC, UITableViewDataSource, UITableViewDelegate, UISearchCon
     
     func filterContentForSearchText(_ searchText: String, scope: String = "All") {
         
-        filteredCoins = allCoinsList.filter({( coinData : CoinData) -> Bool in
+        filteredCoins = allCoinsData.filter({( coinData : CoinData) -> Bool in
             
             let inName = coinData.name.lowercased().contains(searchText.lowercased())
             let inSymbol = coinData.symbol.lowercased().contains(searchText.lowercased())

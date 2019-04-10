@@ -20,6 +20,7 @@
 		7833F4C420A82D27009E9DAB /* Top100Cell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7833F4C320A82D27009E9DAB /* Top100Cell.swift */; };
 		788D5477201B6C1800D2A2CE /* BaseVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 788D5476201B6C1800D2A2CE /* BaseVC.swift */; };
 		78B122E3225B209300CCB38B /* Double+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78B122E2225B209300CCB38B /* Double+Extensions.swift */; };
+		78B122E6225E229E00CCB38B /* PrivateConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78B122E5225E229E00CCB38B /* PrivateConstants.swift */; };
 		78B3B77A2018627200D69299 /* AddCoinVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78B3B7792018627200D69299 /* AddCoinVC.swift */; };
 		78B3B77C201887DC00D69299 /* CoinDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78B3B77B201887DC00D69299 /* CoinDetailVC.swift */; };
 		78B3B77E20188DE500D69299 /* ConverseColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78B3B77D20188DE500D69299 /* ConverseColor.swift */; };
@@ -46,6 +47,7 @@
 		7833F4C320A82D27009E9DAB /* Top100Cell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Top100Cell.swift; sourceTree = "<group>"; };
 		788D5476201B6C1800D2A2CE /* BaseVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseVC.swift; sourceTree = "<group>"; };
 		78B122E2225B209300CCB38B /* Double+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+Extensions.swift"; sourceTree = "<group>"; };
+		78B122E5225E229E00CCB38B /* PrivateConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivateConstants.swift; sourceTree = "<group>"; };
 		78B3B7792018627200D69299 /* AddCoinVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCoinVC.swift; sourceTree = "<group>"; };
 		78B3B77B201887DC00D69299 /* CoinDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinDetailVC.swift; sourceTree = "<group>"; };
 		78B3B77D20188DE500D69299 /* ConverseColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConverseColor.swift; sourceTree = "<group>"; };
@@ -146,6 +148,7 @@
 			isa = PBXGroup;
 			children = (
 				781314E0201353DD00A3D4E4 /* Constants.swift */,
+				78B122E5225E229E00CCB38B /* PrivateConstants.swift */,
 				78B3B77D20188DE500D69299 /* ConverseColor.swift */,
 			);
 			path = Resources;
@@ -295,6 +298,7 @@
 				78B3B77E20188DE500D69299 /* ConverseColor.swift in Sources */,
 				7833F4C020A8257D009E9DAB /* Top100VC.swift in Sources */,
 				78B122E3225B209300CCB38B /* Double+Extensions.swift in Sources */,
+				78B122E6225E229E00CCB38B /* PrivateConstants.swift in Sources */,
 				78B3B77C201887DC00D69299 /* CoinDetailVC.swift in Sources */,
 				7833F4C220A82595009E9DAB /* CryptoLoveVC.swift in Sources */,
 				781314DF201323CE00A3D4E4 /* HomeVC.swift in Sources */,
