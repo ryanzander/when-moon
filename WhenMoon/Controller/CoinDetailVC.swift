@@ -131,6 +131,13 @@ class CoinDetailVC: BaseVC {
         }
     }
 
+    @IBAction func cmcBtnTap(_ sender: Any) {
+        
+        if let url = URL(string: "https://www.coinmarketcap.com") {
+            UIApplication.shared.open(url, options: [:], completionHandler: nil)
+        }
+        
+    }
     
     @IBAction func minusTouched(_ sender: Any) {
         

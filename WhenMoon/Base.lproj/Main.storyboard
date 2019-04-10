@@ -497,15 +497,31 @@
                                     <action selector="hideKeyboard:" destination="eQM-o7-e27" eventType="touchUpInside" id="pdw-zi-JpU"/>
                                 </connections>
                             </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="F58-Jg-b79">
+                                <rect key="frame" x="50" y="530" width="220" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="Gfi-Bb-9rW"/>
+                                    <constraint firstAttribute="width" constant="220" id="QMQ-rB-ikt"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Avenir-Heavy" family="Avenir" pointSize="11"/>
+                                <state key="normal" title="Data provided by CoinMarketCap.com">
+                                    <color key="titleColor" red="0.99942404029999998" green="0.98555368190000003" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="cmcBtnTap:" destination="eQM-o7-e27" eventType="touchUpInside" id="fQG-f0-qam"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.13725490200000001" green="0.0" blue="0.33725490200000002" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
+                            <constraint firstItem="ZGj-br-HHc" firstAttribute="bottom" secondItem="F58-Jg-b79" secondAttribute="bottom" constant="8" id="5Hs-HL-c5F"/>
                             <constraint firstItem="ZGj-br-HHc" firstAttribute="trailing" secondItem="KxL-V2-o1x" secondAttribute="trailing" constant="20" id="DtX-9c-fGg"/>
                             <constraint firstItem="KxL-V2-o1x" firstAttribute="top" secondItem="ZGj-br-HHc" secondAttribute="top" constant="20" id="FyM-Io-xPi"/>
                             <constraint firstItem="IXy-YM-Vqc" firstAttribute="leading" secondItem="ZGj-br-HHc" secondAttribute="leading" constant="20" id="J2I-xA-x1u"/>
                             <constraint firstItem="dTw-Kw-1L4" firstAttribute="leading" secondItem="ZGj-br-HHc" secondAttribute="leading" constant="20" id="JCR-Ki-a8X"/>
                             <constraint firstItem="KxL-V2-o1x" firstAttribute="leading" secondItem="ZGj-br-HHc" secondAttribute="leading" constant="20" id="Pmj-C3-6e1"/>
                             <constraint firstItem="dTw-Kw-1L4" firstAttribute="top" secondItem="KxL-V2-o1x" secondAttribute="bottom" constant="20" id="Y9s-1k-9Ta"/>
+                            <constraint firstItem="F58-Jg-b79" firstAttribute="centerX" secondItem="nvz-UM-3b4" secondAttribute="centerX" id="bhs-42-rha"/>
                             <constraint firstItem="ZGj-br-HHc" firstAttribute="trailing" secondItem="dTw-Kw-1L4" secondAttribute="trailing" constant="20" id="eRa-XF-shI"/>
                             <constraint firstItem="IXy-YM-Vqc" firstAttribute="top" secondItem="dTw-Kw-1L4" secondAttribute="bottom" constant="20" id="tiZ-SK-2dx"/>
                             <constraint firstItem="ZGj-br-HHc" firstAttribute="trailing" secondItem="IXy-YM-Vqc" secondAttribute="trailing" constant="20" id="v4E-hf-d9V"/>
@@ -535,7 +551,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pnp-OU-HOG" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="Zy7-Po-HmC" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="3776" y="-90"/>
+            <point key="canvasLocation" x="3774.375" y="-90.845070422535215"/>
         </scene>
         <!--Add CoinVC-->
         <scene sceneID="sE5-1A-WlL">
@@ -945,6 +961,6 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="fcT-U6-3vT"/>
+        <segue reference="XVb-io-eaC"/>
     </inferredMetricsTieBreakers>
 </document>
