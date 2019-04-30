@@ -93,6 +93,22 @@ class Top100VC: BaseVC, UITableViewDataSource, UITableViewDelegate {
             guard let data = data else { return }
             do {
                 guard let responseDic = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] else { return }
+                
+                // we could possibly exceed the monthly use limit for the api key
+                if let status = responseDic["status"] as? [String: Any] {
+                    if let errorCode = status["error_code"] as? Int {
+                        if errorCode == 429 {
+                            if let errorMessage = status["error_message"] as? String {
+                                // update on main thread
+                                DispatchQueue.main.async {
+                                    self.showAlertWith(title: "Error", message: errorMessage)
+                                }
+                                return
+                            }
+                        }
+                    }
+                }
+                
                 guard let dataArray = responseDic["data"] as? [[String: Any]] else { return }
                 
                 let coins = dataArray.map( { (dic: [String: Any]) -> CoinData in

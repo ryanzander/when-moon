@@ -57,6 +57,7 @@ class HomeVC: BaseVC, UITableViewDataSource, UITableViewDelegate {
         // we should refresh the local myCoins and myCoinsTotals from UserDefaults here
         if let mySavedCoins = defaults.array(forKey: "myCoins") as? [String] {
             myCoins = mySavedCoins
+            
         } else {
             myCoins = [String]()
         }
@@ -114,8 +115,26 @@ class HomeVC: BaseVC, UITableViewDataSource, UITableViewDelegate {
             
             // success
             guard let data = data else { return }
+            //print(data)
             do {
                 guard let responseDic = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] else { return }
+                //print(responseDic)
+                
+                // we could possibly exceed the monthly use limit for the api key
+                if let status = responseDic["status"] as? [String: Any] {
+                    if let errorCode = status["error_code"] as? Int {
+                        if errorCode == 429 {
+                            if let errorMessage = status["error_message"] as? String {
+                                // update on main thread
+                                DispatchQueue.main.async {
+                                    self.showAlertWith(title: "Error", message: errorMessage)
+                                }
+                                return
+                            }
+                        }
+                    }
+                }
+                
                 guard let dataArray = responseDic["data"] as? [[String: Any]] else { return }
                 
                 let coins = dataArray.map( { (dic: [String: Any]) -> CoinData in
